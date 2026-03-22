@@ -1,0 +1,58 @@
+[
+  {
+    "name": "support_portal",
+    "ok": false,
+    "errors": [
+      "Could not parse JSON: Expecting value: line 4 column 13 (char 66)",
+      "Raw output: {\n      \"landscape_context\": {\n         \"elements\": [\n            ...,\n            {\n               \"id\": \"app_customer_ticketing\",\n               \"type\": \"application\",\n               \"name\": \"Online Customer Ticketing System\",\n               \"domain\": \"Customer Service\",\n               \"owner\": \"team_service_ops\",\n               \"environment\": \"prod\",\n               \"technology\": \"React\"\n            }\n         ],\n         \"relations\": [\n            {\n               \"source\": \"app_customer_tick"
+    ],
+    "raw_output": "{\n      \"landscape_context\": {\n         \"elements\": [\n            ...,\n            {\n               \"id\": \"app_customer_ticketing\",\n               \"type\": \"application\",\n               \"name\": \"Online Customer Ticketing System\",\n               \"domain\": \"Customer Service\",\n               \"owner\": \"team_service_ops\",\n               \"environment\": \"prod\",\n               \"technology\": \"React\"\n            }\n         ],\n         \"relations\": [\n            {\n               \"source\": \"app_customer_ticketing\",\n               \"target\": \"cap_customer_support\",\n               \"type\": \"enables\"\n            },\n            {\n               \"source\": \"app_crm\",\n               \"target\": \"app_customer_ticketing\",\n               \"type\": \"integrates_with\"\n            }\n         ]\n      }\n   }",
+    "parsed_output": null
+  },
+  {
+    "name": "inventory_api",
+    "ok": false,
+    "errors": [
+      "Output must contain 'elements' and 'relations'."
+    ],
+    "raw_output": "{\n      \"landscape_context\": {\n         \"elements\": [\n            {\"id\": \"api_inventory\", \"type\": \"API\", \"name\": \"Inventory Availability API\", \"domain\": \"Integration\", \"owner\": \"team_integration\", \"environment\": \"test\"},\n            {\"id\": \"cap_stock_availability\", \"type\": \"business_capability\", \"name\": \"Stock Availability Management\", \"parent\": \"cap_inventory\"}\n         ],\n         \"relations\": [\n            {\n               \"id\": \"api-to-capability\",\n               \"source\": \"api_inventory\",\n               \"target\": \"cap_stock_availability\",\n               \"relationType\": \"provides\"\n            }\n         ]\n      }\n   }",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "api_inventory",
+            "type": "API",
+            "name": "Inventory Availability API",
+            "domain": "Integration",
+            "owner": "team_integration",
+            "environment": "test"
+          },
+          {
+            "id": "cap_stock_availability",
+            "type": "business_capability",
+            "name": "Stock Availability Management",
+            "parent": "cap_inventory"
+          }
+        ],
+        "relations": [
+          {
+            "id": "api-to-capability",
+            "source": "api_inventory",
+            "target": "cap_stock_availability",
+            "relationType": "provides"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "claims_db",
+    "ok": false,
+    "errors": [
+      "Could not parse JSON: Expecting value: line 4 column 13 (char 66)",
+      "Raw output: {\n      \"landscape_context\": {\n         \"elements\": [\n            ...,\n            {\n               \"id\": \"db_claims\",\n               \"type\": \"database\",\n               \"name\": \"Claims Database\"\n            },\n            {\n               \"id\": \"app_claims_core_to_db_claims\",\n               \"type\": \"relation\",\n               \"source\": \"app_claims_core\",\n               \"target\": \"db_claims\",\n               \"relationship\": \"data_store\"\n            }\n         ],\n         \"relations\": [\n            "
+    ],
+    "raw_output": "{\n      \"landscape_context\": {\n         \"elements\": [\n            ...,\n            {\n               \"id\": \"db_claims\",\n               \"type\": \"database\",\n               \"name\": \"Claims Database\"\n            },\n            {\n               \"id\": \"app_claims_core_to_db_claims\",\n               \"type\": \"relation\",\n               \"source\": \"app_claims_core\",\n               \"target\": \"db_claims\",\n               \"relationship\": \"data_store\"\n            }\n         ],\n         \"relations\": [\n            ...,\n            {\n               \"id\": \"app_claims_core_to_db_claims\"\n            }\n         ]\n      }\n   }",
+    "parsed_output": null
+  }
+]
