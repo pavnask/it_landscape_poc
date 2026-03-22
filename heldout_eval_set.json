@@ -1,0 +1,427 @@
+[
+  {
+    "name": "support_portal_sales",
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "cap_customer_support",
+            "type": "business_capability",
+            "name": "Customer Support",
+            "owner": "team_service_ops",
+            "environment": "prod"
+          },
+          {
+            "id": "app_crm",
+            "type": "application",
+            "name": "CRM Core",
+            "domain": "Sales",
+            "owner": "team_sales_platform",
+            "environment": "prod",
+            "technology": "Java"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add one application that enables customers to submit support tickets online and connect it to the existing landscape."
+    }
+  },
+  {
+    "name": "inventory_api_ops",
+    "expected_new_type": "api",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "cap_inventory",
+            "type": "business_capability",
+            "name": "Inventory Management",
+            "owner": "team_supply_chain",
+            "environment": "prod"
+          },
+          {
+            "id": "app_inventory",
+            "type": "application",
+            "name": "Inventory Service",
+            "domain": "Operations",
+            "owner": "team_supply_platform",
+            "environment": "prod",
+            "technology": "Node.js"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add an API so other systems can query stock availability."
+    }
+  },
+  {
+    "name": "claims_db_insurance",
+    "expected_new_type": "database",
+    "required_relation_types": [
+      "reads_from",
+      "writes_to"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "cap_claims",
+            "type": "business_capability",
+            "name": "Claims Processing",
+            "owner": "team_claims",
+            "environment": "prod"
+          },
+          {
+            "id": "app_claims_core",
+            "type": "application",
+            "name": "Claims Core",
+            "domain": "Insurance",
+            "owner": "team_claims_platform",
+            "environment": "prod",
+            "technology": "Java"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add a database for claims records and connect it."
+    }
+  },
+  {
+    "name": "billing_api_finance",
+    "expected_new_type": "api",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "cap_billing",
+            "type": "business_capability",
+            "name": "Billing",
+            "owner": "team_finance_ops",
+            "environment": "prod"
+          },
+          {
+            "id": "app_erp",
+            "type": "application",
+            "name": "ERP Finance",
+            "domain": "Finance",
+            "owner": "team_finance_platform",
+            "environment": "prod",
+            "technology": "SAP"
+          }
+        ],
+        "relations": [
+          {
+            "source": "app_erp",
+            "type": "supports",
+            "target": "cap_billing"
+          }
+        ]
+      },
+      "task": "Add a service that exposes billing data to other internal systems through an API."
+    }
+  },
+  {
+    "name": "catalog_db_retail",
+    "expected_new_type": "database",
+    "required_relation_types": [
+      "reads_from",
+      "writes_to"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "cap_product_catalog",
+            "type": "business_capability",
+            "name": "Product Catalog",
+            "owner": "team_merchandising",
+            "environment": "prod"
+          },
+          {
+            "id": "app_catalog",
+            "type": "application",
+            "name": "Catalog Service",
+            "domain": "Retail",
+            "owner": "team_catalog_platform",
+            "environment": "prod",
+            "technology": "Node.js"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add a database for the product catalog and connect it."
+    }
+  },
+  {
+    "name": "shipment_tracking_logistics",
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "cap_shipments",
+            "type": "business_capability",
+            "name": "Shipment Tracking",
+            "owner": "team_logistics",
+            "environment": "prod"
+          },
+          {
+            "id": "app_warehouse",
+            "type": "application",
+            "name": "Warehouse Service",
+            "domain": "Logistics",
+            "owner": "team_logistics_platform",
+            "environment": "prod",
+            "technology": "Java"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add an application for shipment tracking that depends on warehouse data."
+    }
+  },
+  {
+    "name": "policy_portal_insurance",
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "cap_policy_lookup",
+            "type": "business_capability",
+            "name": "Policy Lookup",
+            "owner": "team_insurance_ops",
+            "environment": "prod"
+          },
+          {
+            "id": "app_policy_admin",
+            "type": "application",
+            "name": "Policy Administration",
+            "domain": "Insurance",
+            "owner": "team_policy_platform",
+            "environment": "prod",
+            "technology": "Java"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add a customer-facing portal for policy lookup that integrates with the policy administration system."
+    }
+  },
+  {
+    "name": "payment_gateway_commerce",
+    "expected_new_type": "api",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "cap_payments",
+            "type": "business_capability",
+            "name": "Payments",
+            "owner": "team_fintech_ops",
+            "environment": "prod"
+          },
+          {
+            "id": "app_checkout",
+            "type": "application",
+            "name": "Checkout Service",
+            "domain": "Commerce",
+            "owner": "team_commerce_platform",
+            "environment": "prod",
+            "technology": "Go"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add a payment gateway API used by checkout to support payments."
+    }
+  },
+  {
+    "name": "customer_analytics_data",
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "cap_customer_analytics",
+            "type": "business_capability",
+            "name": "Customer Analytics",
+            "owner": "team_data_analytics",
+            "environment": "prod"
+          },
+          {
+            "id": "app_crm",
+            "type": "application",
+            "name": "CRM Core",
+            "domain": "Sales",
+            "owner": "team_sales_platform",
+            "environment": "prod",
+            "technology": "Java"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add an analytics application that uses CRM data to support customer analytics."
+    }
+  },
+  {
+    "name": "notifications_engagement",
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "cap_notifications",
+            "type": "business_capability",
+            "name": "Customer Notifications",
+            "owner": "team_customer_engagement",
+            "environment": "prod"
+          },
+          {
+            "id": "app_crm",
+            "type": "application",
+            "name": "CRM Core",
+            "domain": "Sales",
+            "owner": "team_sales_platform",
+            "environment": "prod",
+            "technology": "Java"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add a notification service used by CRM to send customer messages."
+    }
+  },
+  {
+    "name": "partner_orders_b2b",
+    "expected_new_type": "api",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "cap_partner_integrations",
+            "type": "business_capability",
+            "name": "Partner Integrations",
+            "owner": "team_b2b",
+            "environment": "prod"
+          },
+          {
+            "id": "app_orders",
+            "type": "application",
+            "name": "Order Service",
+            "domain": "Commerce",
+            "owner": "team_order_platform",
+            "environment": "prod",
+            "technology": "Python"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add an API for partner order submission."
+    }
+  },
+  {
+    "name": "forecasting_manufacturing",
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "cap_forecasting",
+            "type": "business_capability",
+            "name": "Demand Forecasting",
+            "owner": "team_supply_analytics",
+            "environment": "prod"
+          },
+          {
+            "id": "app_inventory",
+            "type": "application",
+            "name": "Inventory Service",
+            "domain": "Operations",
+            "owner": "team_supply_platform",
+            "environment": "prod",
+            "technology": "Node.js"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add an analytics application that uses inventory data for forecasting."
+    }
+  }
+]

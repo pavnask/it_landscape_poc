@@ -75,3 +75,55 @@ After this starter pack works, expand in this order:
 3. add negative examples for invalid relations
 4. add context-rich prompts with 4–8 existing elements
 5. add a business-description-to-JSON task as a second benchmark
+
+## 6) Richer held-out evaluation
+
+Use the richer test set and stricter semantic validator:
+
+```bash
+python semantic_validator.py train.jsonl
+python heldout_eval.py --model mistral --tests heldout_eval_set.json --output heldout_eval_results.json
+```
+
+Files:
+- `heldout_eval_set.json` — 12 held-out tests with expected output shape
+- `semantic_validator.py` — structural + semantic validation
+- `heldout_eval.py` — runs Ollama against the held-out set
+
+## 7) Prepare train.jsonl
+
+```bash
+python prepare_train.py --seed seed_examples.jsonl --synthetic synthetic_examples.jsonl --output train.jsonl
+```
+
+## 8) LoRA training
+
+Install dependencies in a fresh venv if possible:
+
+```bash
+pip install -r requirements-lora.txt
+```
+
+Train on a Hugging Face compatible Mistral-family model:
+
+```bash
+python train_lora.py   --train_file train.jsonl   --base_model mistralai/Mistral-7B-Instruct-v0.2   --output_dir lora_out   --use_4bit
+```
+
+Notes:
+- `train_lora.py` trains a PEFT/LoRA adapter, not a merged full model.
+- For CPU-only environments, remove `--use_4bit`, but training may be too slow.
+- This script assumes a decoder-only causal LM with Mistral-style module names.
+- I did not execute the training here, so treat it as a ready-to-run starting script and adjust batch size or target modules if your base model differs.
+
+## 9) Compare baseline vs tuned model
+
+Recommended comparison:
+1. Run `heldout_eval.py` on the base model.
+2. Load the LoRA adapter in your inference path.
+3. Run the same held-out set again.
+4. Compare:
+   - parse rate
+   - semantic-valid rate
+   - task-match rate
+   - relation-choice consistency

@@ -1,0 +1,422 @@
+[
+  {
+    "name": "support_portal_sales",
+    "ok": false,
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "errors": [
+      "Relation 1 type 'writes_to' is not allowed from application to business_capability",
+      "Missing required relation types: ['supports']"
+    ],
+    "raw_output": "{\"elements\": [{\"id\": \"app_ticket_submission\", \"type\": \"application\", \"name\": \"Ticket Submission App\", \"owner\": \"team_service_ops\", \"environment\": \"dev\"}], \"relations\": [{\"source\": \"app_crm\", \"type\": \"uses\", \"target\": \"app_ticket_submission\"}, {\"source\": \"app_ticket_submission\", \"type\": \"writes_to\", \"target\": \"cap_customer_support\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_ticket_submission",
+          "type": "application",
+          "name": "Ticket Submission App",
+          "owner": "team_service_ops",
+          "environment": "dev"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_crm",
+          "type": "uses",
+          "target": "app_ticket_submission"
+        },
+        {
+          "source": "app_ticket_submission",
+          "type": "writes_to",
+          "target": "cap_customer_support"
+        }
+      ]
+    }
+  },
+  {
+    "name": "inventory_api_ops",
+    "ok": false,
+    "expected_new_type": "api",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "errors": [
+      "Missing required relation types: ['uses', 'supports']"
+    ],
+    "raw_output": "{\"elements\": [{\"id\": \"api_stock_query\", \"type\": \"api\", \"name\": \"Stock Query API\", \"owner\": \"team_supply_platform\", \"environment\": \"dev\"}],\n    \"relations\": [{\"source\": \"app_inventory\", \"type\": \"exposes\", \"target\": \"api_stock_query\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "api_stock_query",
+          "type": "api",
+          "name": "Stock Query API",
+          "owner": "team_supply_platform",
+          "environment": "dev"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_inventory",
+          "type": "exposes",
+          "target": "api_stock_query"
+        }
+      ]
+    }
+  },
+  {
+    "name": "claims_db_insurance",
+    "ok": true,
+    "expected_new_type": "database",
+    "required_relation_types": [
+      "reads_from",
+      "writes_to"
+    ],
+    "errors": [],
+    "raw_output": "{\"elements\": [{\"id\": \"db_claims_records\", \"type\": \"database\", \"name\": \"ClaimsRecordsDB\", \"owner\": \"team_claims_platform\", \"environment\": \"prod\", \"technology\": \"MySQL\"}], \"relations\": [{\"source\": \"app_claims_core\", \"type\": \"reads_from\", \"target\": \"db_claims_records\"}, {\"source\": \"app_claims_core\", \"type\": \"writes_to\", \"target\": \"db_claims_records\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "db_claims_records",
+          "type": "database",
+          "name": "ClaimsRecordsDB",
+          "owner": "team_claims_platform",
+          "environment": "prod",
+          "technology": "MySQL"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_claims_core",
+          "type": "reads_from",
+          "target": "db_claims_records"
+        },
+        {
+          "source": "app_claims_core",
+          "type": "writes_to",
+          "target": "db_claims_records"
+        }
+      ]
+    }
+  },
+  {
+    "name": "billing_api_finance",
+    "ok": false,
+    "expected_new_type": "api",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "errors": [
+      "Relation 1 type 'reads_from' is not allowed from api to business_capability",
+      "Relation 2 target does not exist in context or output: db_orders",
+      "Missing required relation types: ['supports']"
+    ],
+    "raw_output": "{\"elements\": [{\"id\": \"service_bill_api\", \"type\": \"api\", \"name\": \"Billing API\", \"owner\": \"team_devops\", \"environment\": \"dev\"}], \"relations\": [{\"source\": \"app_erp\", \"type\": \"exposes\", \"target\": \"service_bill_api\"}, {\"source\": \"service_bill_api\", \"type\": \"reads_from\", \"target\": \"cap_billing\"}, {\"source\": \"service_bill_api\", \"type\": \"uses\", \"target\": \"db_orders\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "service_bill_api",
+          "type": "api",
+          "name": "Billing API",
+          "owner": "team_devops",
+          "environment": "dev"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_erp",
+          "type": "exposes",
+          "target": "service_bill_api"
+        },
+        {
+          "source": "service_bill_api",
+          "type": "reads_from",
+          "target": "cap_billing"
+        },
+        {
+          "source": "service_bill_api",
+          "type": "uses",
+          "target": "db_orders"
+        }
+      ]
+    }
+  },
+  {
+    "name": "catalog_db_retail",
+    "ok": true,
+    "expected_new_type": "database",
+    "required_relation_types": [
+      "reads_from",
+      "writes_to"
+    ],
+    "errors": [],
+    "raw_output": "{\"elements\": [{\"id\": \"db_product_catalog\", \"type\": \"database\", \"name\": \"ProductCatalogDB\", \"owner\": \"team_catalog_platform\", \"environment\": \"prod\", \"technology\": \"MongoDB\"}], \"relations\": [{\"source\": \"app_catalog\", \"type\": \"reads_from\", \"target\": \"db_product_catalog\"}, {\"source\": \"app_catalog\", \"type\": \"writes_to\", \"target\": \"db_product_catalog\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "db_product_catalog",
+          "type": "database",
+          "name": "ProductCatalogDB",
+          "owner": "team_catalog_platform",
+          "environment": "prod",
+          "technology": "MongoDB"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_catalog",
+          "type": "reads_from",
+          "target": "db_product_catalog"
+        },
+        {
+          "source": "app_catalog",
+          "type": "writes_to",
+          "target": "db_product_catalog"
+        }
+      ]
+    }
+  },
+  {
+    "name": "shipment_tracking_logistics",
+    "ok": false,
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "errors": [
+      "Missing required relation types: ['supports']"
+    ],
+    "raw_output": "{\"elements\": [{\"id\": \"app_shipment_tracker\", \"type\": \"application\", \"name\": \"Shipment Tracker\", \"owner\": \"team_logistics\", \"environment\": \"prod\"}], \"relations\": [{\"source\": \"app_warehouse\", \"type\": \"uses\", \"target\": \"app_shipment_tracker\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_shipment_tracker",
+          "type": "application",
+          "name": "Shipment Tracker",
+          "owner": "team_logistics",
+          "environment": "prod"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_warehouse",
+          "type": "uses",
+          "target": "app_shipment_tracker"
+        }
+      ]
+    }
+  },
+  {
+    "name": "policy_portal_insurance",
+    "ok": false,
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "errors": [
+      "Expected at least one new element of type 'application', got ['api']",
+      "Missing required relation types: ['supports']"
+    ],
+    "raw_output": "{\"elements\": [{\"id\": \"portal_policy_lookup\", \"type\": \"api\", \"name\": \"Policy Lookup Portal\", \"owner\": \"team_customer_ops\", \"environment\": \"prod\"}], \"relations\": [{\"source\": \"app_policy_admin\", \"type\": \"exposes\", \"target\": \"portal_policy_lookup\"}, {\"source\": \"portal_policy_lookup\", \"type\": \"uses\", \"target\": \"app_policy_admin\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "portal_policy_lookup",
+          "type": "api",
+          "name": "Policy Lookup Portal",
+          "owner": "team_customer_ops",
+          "environment": "prod"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_policy_admin",
+          "type": "exposes",
+          "target": "portal_policy_lookup"
+        },
+        {
+          "source": "portal_policy_lookup",
+          "type": "uses",
+          "target": "app_policy_admin"
+        }
+      ]
+    }
+  },
+  {
+    "name": "payment_gateway_commerce",
+    "ok": false,
+    "expected_new_type": "api",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "errors": [
+      "Missing required relation types: ['supports']"
+    ],
+    "raw_output": "{\"elements\": [{\"id\": \"api_payment_gateway\", \"type\": \"api\", \"name\": \"PaymentGatewayAPI\", \"owner\": \"team_fintech_ops\", \"environment\": \"prod\"}], \"relations\": [{\"source\": \"app_checkout\", \"type\": \"uses\", \"target\": \"api_payment_gateway\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "api_payment_gateway",
+          "type": "api",
+          "name": "PaymentGatewayAPI",
+          "owner": "team_fintech_ops",
+          "environment": "prod"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_checkout",
+          "type": "uses",
+          "target": "api_payment_gateway"
+        }
+      ]
+    }
+  },
+  {
+    "name": "customer_analytics_data",
+    "ok": true,
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "errors": [],
+    "raw_output": "{\"elements\": [{\"id\": \"app_analytics\", \"type\": \"application\", \"name\": \"Customer Analytics App\", \"owner\": \"team_data_analytics\", \"environment\": \"prod\"}], \"relations\": [{\"source\": \"app_crm\", \"type\": \"uses\", \"target\": \"app_analytics\"}, {\"source\": \"app_analytics\", \"type\": \"supports\", \"target\": \"cap_customer_analytics\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_analytics",
+          "type": "application",
+          "name": "Customer Analytics App",
+          "owner": "team_data_analytics",
+          "environment": "prod"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_crm",
+          "type": "uses",
+          "target": "app_analytics"
+        },
+        {
+          "source": "app_analytics",
+          "type": "supports",
+          "target": "cap_customer_analytics"
+        }
+      ]
+    }
+  },
+  {
+    "name": "notifications_engagement",
+    "ok": false,
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "supports"
+    ],
+    "errors": [
+      "Missing required relation types: ['supports']"
+    ],
+    "raw_output": "{\"elements\": [{\"id\": \"app_notification_service\", \"type\": \"application\", \"name\": \"Notification Service\", \"owner\": \"team_customer_engagement\", \"environment\": \"prod\", \"technology\": \"Node.js\"}], \"relations\": [{\"source\": \"app_crm\", \"type\": \"uses\", \"target\": \"app_notification_service\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_notification_service",
+          "type": "application",
+          "name": "Notification Service",
+          "owner": "team_customer_engagement",
+          "environment": "prod",
+          "technology": "Node.js"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_crm",
+          "type": "uses",
+          "target": "app_notification_service"
+        }
+      ]
+    }
+  },
+  {
+    "name": "partner_orders_b2b",
+    "ok": false,
+    "expected_new_type": "api",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "errors": [
+      "Missing required relation types: ['supports']"
+    ],
+    "raw_output": "{\"elements\": [{\"id\": \"api_partner_orders\", \"type\": \"api\", \"name\": \"Partner Order Submission API\", \"owner\": \"team_b2b\", \"environment\": \"prod\"}], \"relations\": [{\"source\": \"app_orders\", \"type\": \"uses\", \"target\": \"api_partner_orders\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "api_partner_orders",
+          "type": "api",
+          "name": "Partner Order Submission API",
+          "owner": "team_b2b",
+          "environment": "prod"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_orders",
+          "type": "uses",
+          "target": "api_partner_orders"
+        }
+      ]
+    }
+  },
+  {
+    "name": "forecasting_manufacturing",
+    "ok": false,
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "errors": [
+      "Missing required relation types: ['supports']"
+    ],
+    "raw_output": "{\n      \"elements\": [\n         {\n            \"id\": \"app_demand_forecasting\",\n            \"type\": \"application\",\n            \"name\": \"Demand Forecasting App\",\n            \"owner\": \"team_supply_analytics\",\n            \"environment\": \"prod\"\n         },\n         {\n            \"id\": \"db_inventory\",\n            \"type\": \"database\",\n            \"name\": \"InventoryDB\",\n            \"owner\": \"team_supply_platform\",\n            \"environment\": \"prod\",\n            \"technology\": \"MongoDB\"\n         }\n      ],\n      \"relations\": [\n         {\n            \"source\": \"app_inventory\",\n            \"type\": \"uses\",\n            \"target\": \"db_inventory\"\n         },\n         {\n            \"source\": \"app_demand_forecasting\",\n            \"type\": \"uses\",\n            \"target\": \"app_inventory\"\n         }\n      ]\n   }",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_demand_forecasting",
+          "type": "application",
+          "name": "Demand Forecasting App",
+          "owner": "team_supply_analytics",
+          "environment": "prod"
+        },
+        {
+          "id": "db_inventory",
+          "type": "database",
+          "name": "InventoryDB",
+          "owner": "team_supply_platform",
+          "environment": "prod",
+          "technology": "MongoDB"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_inventory",
+          "type": "uses",
+          "target": "db_inventory"
+        },
+        {
+          "source": "app_demand_forecasting",
+          "type": "uses",
+          "target": "app_inventory"
+        }
+      ]
+    }
+  }
+]
