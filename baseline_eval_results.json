@@ -3,48 +3,36 @@
     "name": "support_portal",
     "ok": true,
     "errors": [],
-    "raw_output": "{\n      \"elements\": [\n         {\"id\": \"app_support_ticket\", \"type\": \"application\", \"name\": \"Online Customer Support Ticketing System\", \"owner\": \"team_service_ops\", \"environment\": \"prod\", \"technology\": \"JavaScript\"},\n         {\"id\": \"cap_customer_tickets\", \"type\": \"business_capability\", \"name\": \"Customer Ticket Management\", \"owner\": \"team_service_ops\", \"environment\": \"prod\"}\n      ],\n      \"relations\": [\n         {\"source\": \"app_crm\", \"target\": \"cap_customer_tickets\", \"type\": \"uses\"},\n         {\"source\": \"app_support_ticket\", \"target\": \"cap_customer_tickets\", \"type\": \"owns\"}\n      ]\n   }",
+    "raw_output": "{\"elements\": [{\"id\": \"app_ticket_submission\", \"type\": \"application\", \"name\": \"Ticket Submission App\", \"owner\": \"team_service_ops\", \"environment\": \"dev\"}], \"relations\": [{\"source\": \"app_crm\", \"type\": \"uses\", \"target\": \"app_ticket_submission\"}, {\"source\": \"app_ticket_submission\", \"type\": \"writes_to\", \"target\": \"cap_customer_support\"}]}",
     "parsed_output": {
       "elements": [
         {
-          "id": "app_support_ticket",
+          "id": "app_ticket_submission",
           "type": "application",
-          "name": "Online Customer Support Ticketing System",
+          "name": "Ticket Submission App",
           "owner": "team_service_ops",
-          "environment": "prod",
-          "technology": "JavaScript"
-        },
-        {
-          "id": "cap_customer_tickets",
-          "type": "business_capability",
-          "name": "Customer Ticket Management",
-          "owner": "team_service_ops",
-          "environment": "prod"
+          "environment": "dev"
         }
       ],
       "relations": [
         {
           "source": "app_crm",
-          "target": "cap_customer_tickets",
-          "type": "uses"
+          "type": "uses",
+          "target": "app_ticket_submission"
         },
         {
-          "source": "app_support_ticket",
-          "target": "cap_customer_tickets",
-          "type": "owns"
+          "source": "app_ticket_submission",
+          "type": "writes_to",
+          "target": "cap_customer_support"
         }
       ]
     }
   },
   {
     "name": "inventory_api",
-    "ok": false,
-    "errors": [
-      "Element 1 missing fields: ['environment', 'name', 'owner']",
-      "Element 1 has invalid type: uses",
-      "Element 1 has invalid environment: None"
-    ],
-    "raw_output": "{\n     \"elements\": [\n       {\n         \"id\": \"api_stock_query\",\n         \"type\": \"api\",\n         \"name\": \"Stock Query API\",\n         \"owner\": \"team_supply_platform\",\n         \"environment\": \"prod\"\n       },\n       {\n         \"id\": \"rel_app_api\",\n         \"type\": \"uses\",\n         \"source\": \"app_inventory\",\n         \"target\": \"api_stock_query\"\n       }\n     ],\n     \"relations\": [\n       {\n         \"id\": \"rel_api_db\",\n         \"type\": \"reads_from\",\n         \"source\": \"api_stock_query\",\n         \"target\": \"cap_inventory\"\n       }\n     ]\n   }",
+    "ok": true,
+    "errors": [],
+    "raw_output": "{\"elements\": [{\"id\": \"api_stock_query\", \"type\": \"api\", \"name\": \"Stock Query API\", \"owner\": \"team_supply_platform\", \"environment\": \"prod\"}], \"relations\": [{\"source\": \"app_inventory\", \"type\": \"exposes\", \"target\": \"api_stock_query\"}]}",
     "parsed_output": {
       "elements": [
         {
@@ -53,55 +41,43 @@
           "name": "Stock Query API",
           "owner": "team_supply_platform",
           "environment": "prod"
-        },
-        {
-          "id": "rel_app_api",
-          "type": "uses",
-          "source": "app_inventory",
-          "target": "api_stock_query"
         }
       ],
       "relations": [
         {
-          "id": "rel_api_db",
-          "type": "reads_from",
-          "source": "api_stock_query",
-          "target": "cap_inventory"
+          "source": "app_inventory",
+          "type": "exposes",
+          "target": "api_stock_query"
         }
       ]
     }
   },
   {
     "name": "claims_db",
-    "ok": false,
-    "errors": [
-      "Element 0 missing fields: ['environment', 'owner']",
-      "Element 0 has invalid environment: None"
-    ],
-    "raw_output": "{\n    \"elements\": [\n      {\n        \"id\": \"db_claims_records\",\n        \"type\": \"database\",\n        \"name\": \"Claims Records Database\"\n      },\n      {\n        \"id\": \"app_claims_core\",\n        \"type\": \"application\",\n        \"name\": \"Claims Core\",\n        \"domain\": \"Insurance\",\n        \"owner\": \"team_claims_platform\",\n        \"environment\": \"prod\",\n        \"technology\": \"Java\"\n      }\n    ],\n    \"relations\": [\n      {\n        \"id\": \"rel_db_app_claims_core\",\n        \"type\": \"writes_to\",\n        \"source\": \"db_claims_records\",\n        \"target\": \"app_claims_core\"\n      }\n    ]\n  }",
+    "ok": true,
+    "errors": [],
+    "raw_output": "{\"elements\": [{\"id\": \"db_claims\", \"type\": \"database\", \"name\": \"ClaimsDB\", \"owner\": \"team_claims_platform\", \"environment\": \"prod\", \"technology\": \"MySQL\"}], \"relations\": [{\"source\": \"app_claims_core\", \"type\": \"reads_from\", \"target\": \"db_claims\"}, {\"source\": \"app_claims_core\", \"type\": \"writes_to\", \"target\": \"db_claims\"}]}",
     "parsed_output": {
       "elements": [
         {
-          "id": "db_claims_records",
+          "id": "db_claims",
           "type": "database",
-          "name": "Claims Records Database"
-        },
-        {
-          "id": "app_claims_core",
-          "type": "application",
-          "name": "Claims Core",
-          "domain": "Insurance",
+          "name": "ClaimsDB",
           "owner": "team_claims_platform",
           "environment": "prod",
-          "technology": "Java"
+          "technology": "MySQL"
         }
       ],
       "relations": [
         {
-          "id": "rel_db_app_claims_core",
+          "source": "app_claims_core",
+          "type": "reads_from",
+          "target": "db_claims"
+        },
+        {
+          "source": "app_claims_core",
           "type": "writes_to",
-          "source": "db_claims_records",
-          "target": "app_claims_core"
+          "target": "db_claims"
         }
       ]
     }

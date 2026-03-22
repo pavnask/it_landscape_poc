@@ -49,26 +49,37 @@ PROMPTS = [
 SYSTEM = """
 You are a strict JSON generator.
 
-Rules:
-- Output ONLY valid JSON
-- DO NOT include explanations
-- DO NOT include ...
-- DO NOT include "landscape_context"
-- Output MUST be exactly:
-
+Return exactly one JSON object with this shape:
 {
   "elements": [...],
   "relations": [...]
 }
 
-Constraints:
-- element.type must be one of: application, database, api, team, business_capability
-- relation.type must be one of: owns, uses, reads_from, writes_to, exposes, supports
-- Use lowercase values exactly as given
-- Do NOT invent new fields
-- Do NOT include IDs that are not defined
+Rules:
+- Output JSON only
+- No markdown
+- No comments
+- No extra keys at the top level
+- Do not repeat or copy existing context elements
+- Generate only NEW elements and NEW relations
 
-If unsure, return empty arrays.
+Element rules:
+- Every element must include: id, type, name, owner, environment
+- Allowed element.type values only:
+  application, database, api, team, business_capability
+- environment must be one of:
+  dev, test, prod
+
+Relation rules:
+- Every relation must include: source, type, target
+- Allowed relation.type values only:
+  owns, uses, reads_from, writes_to, exposes, supports
+- Relations must go in the relations array only
+- Never place relations inside elements
+- Do not add relation ids
+
+If unsure, return:
+{"elements":[],"relations":[]}
 """
 
 def run_ollama(model: str, prompt: str) -> str:
@@ -79,26 +90,62 @@ def run_ollama(model: str, prompt: str) -> str:
     return result.stdout.strip()
 
 def build_prompt(payload: dict) -> str:
-    example = {
+    example_input = {
+        "landscape_context": {
+            "elements": [
+                {
+                    "id": "cap_order_management",
+                    "type": "business_capability",
+                    "name": "Order Management",
+                    "owner": "team_ops",
+                    "environment": "prod"
+                },
+                {
+                    "id": "app_order_service",
+                    "type": "application",
+                    "name": "Order Service",
+                    "domain": "Operations",
+                    "owner": "team_order_platform",
+                    "environment": "prod",
+                    "technology": "Python"
+                }
+            ],
+            "relations": []
+        },
+        "task": "Add a database for persistent order storage and connect it."
+    }
+
+    example_output = {
         "elements": [
             {
-                "id": "app_example",
-                "type": "application",
-                "name": "Example App",
-                "owner": "team_example",
+                "id": "db_orders",
+                "type": "database",
+                "name": "OrdersDB",
+                "owner": "team_order_platform",
                 "environment": "prod",
-                "technology": "Python"
+                "technology": "PostgreSQL"
             }
         ],
-        "relations": []
+        "relations": [
+            {
+                "source": "app_order_service",
+                "type": "reads_from",
+                "target": "db_orders"
+            },
+            {
+                "source": "app_order_service",
+                "type": "writes_to",
+                "target": "db_orders"
+            }
+        ]
     }
 
     return (
         SYSTEM + "\n\n"
-        "Example output format:\n"
-        f"{json.dumps(example)}\n\n"
-        "Task:\n"
-        "Generate ONLY new elements and relations.\n\n"
+        "Example:\n"
+        f"Input:\n{json.dumps(example_input)}\n\n"
+        f"Output:\n{json.dumps(example_output)}\n\n"
+        "Now solve this:\n"
         f"Input:\n{json.dumps(payload)}\n"
     )
 
