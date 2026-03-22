@@ -46,7 +46,30 @@ PROMPTS = [
     }
 ]
 
-SYSTEM = "You generate only valid JSON with keys elements and relations. No markdown, no commentary."
+SYSTEM = """
+You are a strict JSON generator.
+
+Rules:
+- Output ONLY valid JSON
+- DO NOT include explanations
+- DO NOT include ...
+- DO NOT include "landscape_context"
+- Output MUST be exactly:
+
+{
+  "elements": [...],
+  "relations": [...]
+}
+
+Constraints:
+- element.type must be one of: application, database, api, team, business_capability
+- relation.type must be one of: owns, uses, reads_from, writes_to, exposes, supports
+- Use lowercase values exactly as given
+- Do NOT invent new fields
+- Do NOT include IDs that are not defined
+
+If unsure, return empty arrays.
+"""
 
 def run_ollama(model: str, prompt: str) -> str:
     cmd = ["ollama", "run", model, prompt]
@@ -56,10 +79,26 @@ def run_ollama(model: str, prompt: str) -> str:
     return result.stdout.strip()
 
 def build_prompt(payload: dict) -> str:
+    example = {
+        "elements": [
+            {
+                "id": "app_example",
+                "type": "application",
+                "name": "Example App",
+                "owner": "team_example",
+                "environment": "prod",
+                "technology": "Python"
+            }
+        ],
+        "relations": []
+    }
+
     return (
         SYSTEM + "\n\n"
+        "Example output format:\n"
+        f"{json.dumps(example)}\n\n"
         "Task:\n"
-        "Given the enterprise IT landscape context, generate only the new landscape elements and relations in valid JSON.\n\n"
+        "Generate ONLY new elements and relations.\n\n"
         f"Input:\n{json.dumps(payload)}\n"
     )
 

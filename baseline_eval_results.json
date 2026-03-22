@@ -1,58 +1,109 @@
 [
   {
     "name": "support_portal",
-    "ok": false,
-    "errors": [
-      "Could not parse JSON: Expecting value: line 4 column 13 (char 66)",
-      "Raw output: {\n      \"landscape_context\": {\n         \"elements\": [\n            ...,\n            {\n               \"id\": \"app_customer_ticketing\",\n               \"type\": \"application\",\n               \"name\": \"Online Customer Ticketing System\",\n               \"domain\": \"Customer Service\",\n               \"owner\": \"team_service_ops\",\n               \"environment\": \"prod\",\n               \"technology\": \"React\"\n            }\n         ],\n         \"relations\": [\n            {\n               \"source\": \"app_customer_tick"
-    ],
-    "raw_output": "{\n      \"landscape_context\": {\n         \"elements\": [\n            ...,\n            {\n               \"id\": \"app_customer_ticketing\",\n               \"type\": \"application\",\n               \"name\": \"Online Customer Ticketing System\",\n               \"domain\": \"Customer Service\",\n               \"owner\": \"team_service_ops\",\n               \"environment\": \"prod\",\n               \"technology\": \"React\"\n            }\n         ],\n         \"relations\": [\n            {\n               \"source\": \"app_customer_ticketing\",\n               \"target\": \"cap_customer_support\",\n               \"type\": \"enables\"\n            },\n            {\n               \"source\": \"app_crm\",\n               \"target\": \"app_customer_ticketing\",\n               \"type\": \"integrates_with\"\n            }\n         ]\n      }\n   }",
-    "parsed_output": null
+    "ok": true,
+    "errors": [],
+    "raw_output": "{\n      \"elements\": [\n         {\"id\": \"app_support_ticket\", \"type\": \"application\", \"name\": \"Online Customer Support Ticketing System\", \"owner\": \"team_service_ops\", \"environment\": \"prod\", \"technology\": \"JavaScript\"},\n         {\"id\": \"cap_customer_tickets\", \"type\": \"business_capability\", \"name\": \"Customer Ticket Management\", \"owner\": \"team_service_ops\", \"environment\": \"prod\"}\n      ],\n      \"relations\": [\n         {\"source\": \"app_crm\", \"target\": \"cap_customer_tickets\", \"type\": \"uses\"},\n         {\"source\": \"app_support_ticket\", \"target\": \"cap_customer_tickets\", \"type\": \"owns\"}\n      ]\n   }",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_support_ticket",
+          "type": "application",
+          "name": "Online Customer Support Ticketing System",
+          "owner": "team_service_ops",
+          "environment": "prod",
+          "technology": "JavaScript"
+        },
+        {
+          "id": "cap_customer_tickets",
+          "type": "business_capability",
+          "name": "Customer Ticket Management",
+          "owner": "team_service_ops",
+          "environment": "prod"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_crm",
+          "target": "cap_customer_tickets",
+          "type": "uses"
+        },
+        {
+          "source": "app_support_ticket",
+          "target": "cap_customer_tickets",
+          "type": "owns"
+        }
+      ]
+    }
   },
   {
     "name": "inventory_api",
     "ok": false,
     "errors": [
-      "Output must contain 'elements' and 'relations'."
+      "Element 1 missing fields: ['environment', 'name', 'owner']",
+      "Element 1 has invalid type: uses",
+      "Element 1 has invalid environment: None"
     ],
-    "raw_output": "{\n      \"landscape_context\": {\n         \"elements\": [\n            {\"id\": \"api_inventory\", \"type\": \"API\", \"name\": \"Inventory Availability API\", \"domain\": \"Integration\", \"owner\": \"team_integration\", \"environment\": \"test\"},\n            {\"id\": \"cap_stock_availability\", \"type\": \"business_capability\", \"name\": \"Stock Availability Management\", \"parent\": \"cap_inventory\"}\n         ],\n         \"relations\": [\n            {\n               \"id\": \"api-to-capability\",\n               \"source\": \"api_inventory\",\n               \"target\": \"cap_stock_availability\",\n               \"relationType\": \"provides\"\n            }\n         ]\n      }\n   }",
+    "raw_output": "{\n     \"elements\": [\n       {\n         \"id\": \"api_stock_query\",\n         \"type\": \"api\",\n         \"name\": \"Stock Query API\",\n         \"owner\": \"team_supply_platform\",\n         \"environment\": \"prod\"\n       },\n       {\n         \"id\": \"rel_app_api\",\n         \"type\": \"uses\",\n         \"source\": \"app_inventory\",\n         \"target\": \"api_stock_query\"\n       }\n     ],\n     \"relations\": [\n       {\n         \"id\": \"rel_api_db\",\n         \"type\": \"reads_from\",\n         \"source\": \"api_stock_query\",\n         \"target\": \"cap_inventory\"\n       }\n     ]\n   }",
     "parsed_output": {
-      "landscape_context": {
-        "elements": [
-          {
-            "id": "api_inventory",
-            "type": "API",
-            "name": "Inventory Availability API",
-            "domain": "Integration",
-            "owner": "team_integration",
-            "environment": "test"
-          },
-          {
-            "id": "cap_stock_availability",
-            "type": "business_capability",
-            "name": "Stock Availability Management",
-            "parent": "cap_inventory"
-          }
-        ],
-        "relations": [
-          {
-            "id": "api-to-capability",
-            "source": "api_inventory",
-            "target": "cap_stock_availability",
-            "relationType": "provides"
-          }
-        ]
-      }
+      "elements": [
+        {
+          "id": "api_stock_query",
+          "type": "api",
+          "name": "Stock Query API",
+          "owner": "team_supply_platform",
+          "environment": "prod"
+        },
+        {
+          "id": "rel_app_api",
+          "type": "uses",
+          "source": "app_inventory",
+          "target": "api_stock_query"
+        }
+      ],
+      "relations": [
+        {
+          "id": "rel_api_db",
+          "type": "reads_from",
+          "source": "api_stock_query",
+          "target": "cap_inventory"
+        }
+      ]
     }
   },
   {
     "name": "claims_db",
     "ok": false,
     "errors": [
-      "Could not parse JSON: Expecting value: line 4 column 13 (char 66)",
-      "Raw output: {\n      \"landscape_context\": {\n         \"elements\": [\n            ...,\n            {\n               \"id\": \"db_claims\",\n               \"type\": \"database\",\n               \"name\": \"Claims Database\"\n            },\n            {\n               \"id\": \"app_claims_core_to_db_claims\",\n               \"type\": \"relation\",\n               \"source\": \"app_claims_core\",\n               \"target\": \"db_claims\",\n               \"relationship\": \"data_store\"\n            }\n         ],\n         \"relations\": [\n            "
+      "Element 0 missing fields: ['environment', 'owner']",
+      "Element 0 has invalid environment: None"
     ],
-    "raw_output": "{\n      \"landscape_context\": {\n         \"elements\": [\n            ...,\n            {\n               \"id\": \"db_claims\",\n               \"type\": \"database\",\n               \"name\": \"Claims Database\"\n            },\n            {\n               \"id\": \"app_claims_core_to_db_claims\",\n               \"type\": \"relation\",\n               \"source\": \"app_claims_core\",\n               \"target\": \"db_claims\",\n               \"relationship\": \"data_store\"\n            }\n         ],\n         \"relations\": [\n            ...,\n            {\n               \"id\": \"app_claims_core_to_db_claims\"\n            }\n         ]\n      }\n   }",
-    "parsed_output": null
+    "raw_output": "{\n    \"elements\": [\n      {\n        \"id\": \"db_claims_records\",\n        \"type\": \"database\",\n        \"name\": \"Claims Records Database\"\n      },\n      {\n        \"id\": \"app_claims_core\",\n        \"type\": \"application\",\n        \"name\": \"Claims Core\",\n        \"domain\": \"Insurance\",\n        \"owner\": \"team_claims_platform\",\n        \"environment\": \"prod\",\n        \"technology\": \"Java\"\n      }\n    ],\n    \"relations\": [\n      {\n        \"id\": \"rel_db_app_claims_core\",\n        \"type\": \"writes_to\",\n        \"source\": \"db_claims_records\",\n        \"target\": \"app_claims_core\"\n      }\n    ]\n  }",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "db_claims_records",
+          "type": "database",
+          "name": "Claims Records Database"
+        },
+        {
+          "id": "app_claims_core",
+          "type": "application",
+          "name": "Claims Core",
+          "domain": "Insurance",
+          "owner": "team_claims_platform",
+          "environment": "prod",
+          "technology": "Java"
+        }
+      ],
+      "relations": [
+        {
+          "id": "rel_db_app_claims_core",
+          "type": "writes_to",
+          "source": "db_claims_records",
+          "target": "app_claims_core"
+        }
+      ]
+    }
   }
 ]
