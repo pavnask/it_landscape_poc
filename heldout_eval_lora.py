@@ -26,12 +26,71 @@ def extract_first_json_object(text: str) -> str:
 
 
 def build_prompt(payload):
-    # shorter prompt for speed
+    example_input = {
+        "landscape_context": {
+            "elements": [
+                {
+                    "id": "cap_order_management",
+                    "type": "business_capability",
+                    "name": "Order Management",
+                    "owner": "team_ops",
+                    "environment": "prod"
+                },
+                {
+                    "id": "app_order_service",
+                    "type": "application",
+                    "name": "Order Service",
+                    "domain": "Operations",
+                    "owner": "team_order_platform",
+                    "environment": "prod",
+                    "technology": "Python"
+                }
+            ],
+            "relations": []
+        },
+        "task": "Add a database for persistent order storage and connect it."
+    }
+
+    example_output = {
+        "elements": [
+            {
+                "id": "db_orders",
+                "type": "database",
+                "name": "OrdersDB",
+                "owner": "team_order_platform",
+                "environment": "prod",
+                "technology": "PostgreSQL"
+            }
+        ],
+        "relations": [
+            {
+                "source": "app_order_service",
+                "type": "reads_from",
+                "target": "db_orders"
+            },
+            {
+                "source": "app_order_service",
+                "type": "writes_to",
+                "target": "db_orders"
+            }
+        ]
+    }
+
     return (
-        "Return ONLY JSON with keys elements and relations.\n"
-        "Allowed element types: application, database, api, team, business_capability.\n"
-        "Allowed relation types: owns, uses, reads_from, writes_to, exposes, supports.\n\n"
-        f"Input:\n{json.dumps(payload)}\n"
+        "You are a strict JSON generator.\n"
+        "Return ONLY one JSON object with exactly these top-level keys:\n"
+        '{"elements": [...], "relations": [...]}'
+        "\n\nRules:\n"
+        "- Output JSON only\n"
+        "- Do not output landscape_context\n"
+        "- Do not repeat the input\n"
+        "- Generate only NEW elements and NEW relations\n"
+        "- Allowed element types: application, database, api, team, business_capability\n"
+        "- Allowed relation types: owns, uses, reads_from, writes_to, exposes, supports\n"
+        "- If unsure, return {\"elements\":[],\"relations\":[]}\n\n"
+        f"Example input:\n{json.dumps(example_input)}\n\n"
+        f"Example output:\n{json.dumps(example_output)}\n\n"
+        f"Now solve this input:\n{json.dumps(payload)}\n"
     )
 
 
@@ -42,25 +101,26 @@ def generate(model, tokenizer, prompt):
         inputs = {k: v.to("mps") for k, v in inputs.items()}
 
     print(f"Prompt tokens: {inputs['input_ids'].shape[1]}", flush=True)
+    print("Starting generation...", flush=True)
+
+    import time
     t0 = time.time()
 
-    print("Starting generation...", flush=True)
     with torch.inference_mode():
         outputs = model.generate(
             **inputs,
-            max_new_tokens=12,
+            max_new_tokens=140,
             do_sample=False,
             num_beams=1,
-            use_cache=False,
+            use_cache=True,
             pad_token_id=tokenizer.eos_token_id,
             eos_token_id=tokenizer.eos_token_id,
         )
-    print("Generation finished.", flush=True)
-    print(f"Generation took {time.time() - t0:.1f}s", flush=True)
+
+    print(f"Generation finished in {time.time() - t0:.1f}s", flush=True)
 
     generated_ids = outputs[0][inputs["input_ids"].shape[1]:]
     text = tokenizer.decode(generated_ids, skip_special_tokens=True)
-
     return extract_first_json_object(text)
 
 
@@ -110,7 +170,7 @@ def main():
     tests = load_tests(args.tests)
 
     # 🔥 START SMALL
-    tests = tests[:1]
+    #tests = tests[:1]
 
     results = []
 
@@ -118,9 +178,9 @@ def main():
         print(f"\nRunning test {i}/{len(tests)}: {test['name']}", flush=True)
 
         prompt = build_prompt(test["payload"])
-        #raw = generate(model, tokenizer, prompt)
-        smoke_test_forward(model, tokenizer, prompt)
-        return
+        raw = generate(model, tokenizer, prompt)
+        #smoke_test_forward(model, tokenizer, prompt)
+        #return
         print("Raw output:", raw, "\n")
 
         try:
