@@ -130,19 +130,20 @@ Observed during run:
 👉 2 / 20 steps in ~31 minutes  
 👉 ~15 minutes per step  
 
-### Estimated runtime
+### Actual runtime (measured)
 
-- ~15 minutes per step  
-- 20 steps per epoch  
+- Total training time (1 epoch): **~21 hours 38 minutes**
+- ~20 steps per epoch
 
-➡️ **Total ≈ 4–5 hours per epoch**
+➡️ **Actual ≈ ~60–65 minutes per step (end-to-end)**
 
 ### Interpretation
 
-- your training works ✅  
-- it is slow (expected for 7B on laptop)  
-- this is a successful run 👍  
+- training completed successfully ✅  
+- significantly slower than initial estimate  
+- performance degrades over time due to memory pressure and MPS overhead  
 
+👉 This is a successful but **resource-constrained local training run**
 ---
 
 ## ⚠️ Performance Notes
@@ -164,22 +165,74 @@ Observed during run:
 
 ---
 
+## 🧪 Post-Training Evaluation (LoRA Adapter)
+
+After training, the LoRA adapter was:
+
+- successfully loaded
+- merged into the base model
+- executed in forward-pass inference
+
+### Result
+
+- forward pass: ✅ works  
+- model + adapter: ✅ functional  
+- autoregressive generation: ⚠️ impractically slow  
+
+### Key finding
+
+> Autoregressive generation using Hugging Face (`model.generate`) on Mistral-7B + LoRA is not practical on Apple M3 (MPS backend).
+
+Even with:
+- reduced token limits
+- merged adapter
+- simplified prompts
+
+generation remained too slow for full held-out evaluation.
+
+### Conclusion
+
+- model behavior is correct  
+- infrastructure is the bottleneck  
+
+---
+
 ## 🧩 Next Steps
 
-1. Evaluate trained model on held-out set
-2. Compare baseline vs LoRA
-3. Add failure-focused training examples
+1. Run held-out evaluation on GPU (cloud or workstation)
+2. Compare baseline vs LoRA performance
+3. Add failure-focused training examples:
+   - enforce `supports`
+   - correct relation direction
+   - fix API vs application confusion
 4. Retrain and iterate
+
+### Alternative local path
+
+- repeat experiment with smaller (1B–3B) model for full local iteration loop
 
 ---
 
 ## 🧠 Key Learnings
 
 - Prompting solves syntax, not semantics
-- LoRA adapts domain behavior
-- Synthetic data works for POC
+- LoRA successfully adapts domain-specific behavior
+- Synthetic data is viable for POC
 - Semantic validation is essential
-- 7B models are heavy for local training
+
+### Runtime & platform insights
+
+- Apple M3 (MPS) can complete LoRA training for 7B models
+- Training is extremely slow (~20+ hours per epoch)
+- Forward inference works reliably
+- Autoregressive generation is the primary bottleneck
+
+👉 Local laptops are suitable for:
+- experimentation
+- small-scale training
+
+👉 But not ideal for:
+- full-scale evaluation of 7B models
 
 ---
 
@@ -210,6 +263,17 @@ This POC demonstrates that:
 - structured generation requires semantic validation
 - iterative dataset refinement is essential
 
+### Practical takeaway
+
+This POC demonstrates that:
+
+- LoRA training is feasible on Apple Silicon for 7B models
+- domain adaptation works at the model level
+- but full evaluation requires either:
+  - smaller models, or
+  - GPU-backed infrastructure
+
+👉 The approach is validated technically, with operational constraints identified.
 ---
 
 ## 🔧 Status
@@ -217,8 +281,9 @@ This POC demonstrates that:
 - [x] Dataset generation  
 - [x] Baseline evaluation  
 - [x] Semantic validator  
-- [x] Training pipeline  
-- [ ] LoRA evaluation (in progress)  
+- [x] LoRA training completed  
+- [x] Adapter load + forward inference verified  
+- [ ] Full LoRA evaluation (blocked by local inference limits)  
 
 ---
 

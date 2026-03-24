@@ -1,4 +1,5 @@
 import json
+import time
 from pathlib import Path
 
 import torch
@@ -7,125 +8,75 @@ from peft import PeftModel
 
 from semantic_validator import validate_output_obj
 
-SYSTEM = """
-You are a strict JSON generator.
 
-Return exactly one JSON object with this shape:
-{
-  "elements": [...],
-  "relations": [...]
-}
+def extract_first_json_object(text: str) -> str:
+    start = text.find("{")
+    if start == -1:
+        return text.strip()
 
-Rules:
-- Output JSON only
-- No markdown
-- No comments
-- No extra keys at the top level
-- Do not repeat or copy existing context elements
-- Generate only NEW elements and NEW relations
+    depth = 0
+    for i, ch in enumerate(text[start:], start=start):
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                return text[start:i+1]
+    return text[start:].strip()
 
-Element rules:
-- Every element must include: id, type, name, owner, environment
-- Allowed element.type values only:
-  application, database, api, team, business_capability
-- environment must be one of:
-  dev, test, prod
-
-Relation rules:
-- Every relation must include: source, type, target
-- Allowed relation.type values only:
-  owns, uses, reads_from, writes_to, exposes, supports
-- Relations must go in the relations array only
-- Never place relations inside elements
-- Do not add relation ids
-
-If unsure, return:
-{"elements":[],"relations":[]}
-""".strip()
 
 def build_prompt(payload):
-    example_input = {
-        "landscape_context": {
-            "elements": [
-                {
-                    "id": "cap_order_management",
-                    "type": "business_capability",
-                    "name": "Order Management",
-                    "owner": "team_ops",
-                    "environment": "prod"
-                },
-                {
-                    "id": "app_order_service",
-                    "type": "application",
-                    "name": "Order Service",
-                    "domain": "Operations",
-                    "owner": "team_order_platform",
-                    "environment": "prod",
-                    "technology": "Python"
-                }
-            ],
-            "relations": []
-        },
-        "task": "Add a database for persistent order storage and connect it."
-    }
-
-    example_output = {
-        "elements": [
-            {
-                "id": "db_orders",
-                "type": "database",
-                "name": "OrdersDB",
-                "owner": "team_order_platform",
-                "environment": "prod",
-                "technology": "PostgreSQL"
-            }
-        ],
-        "relations": [
-            {
-                "source": "app_order_service",
-                "type": "reads_from",
-                "target": "db_orders"
-            },
-            {
-                "source": "app_order_service",
-                "type": "writes_to",
-                "target": "db_orders"
-            }
-        ]
-    }
-
+    # shorter prompt for speed
     return (
-        SYSTEM + "\n\n"
-        "Example:\n"
-        f"Input:\n{json.dumps(example_input)}\n\n"
-        f"Output:\n{json.dumps(example_output)}\n\n"
-        "Now solve this:\n"
+        "Return ONLY JSON with keys elements and relations.\n"
+        "Allowed element types: application, database, api, team, business_capability.\n"
+        "Allowed relation types: owns, uses, reads_from, writes_to, exposes, supports.\n\n"
         f"Input:\n{json.dumps(payload)}\n"
     )
+
+
+def generate(model, tokenizer, prompt):
+    inputs = tokenizer(prompt, return_tensors="pt")
+
+    if torch.backends.mps.is_available():
+        inputs = {k: v.to("mps") for k, v in inputs.items()}
+
+    print(f"Prompt tokens: {inputs['input_ids'].shape[1]}", flush=True)
+    t0 = time.time()
+
+    print("Starting generation...", flush=True)
+    with torch.inference_mode():
+        outputs = model.generate(
+            **inputs,
+            max_new_tokens=12,
+            do_sample=False,
+            num_beams=1,
+            use_cache=False,
+            pad_token_id=tokenizer.eos_token_id,
+            eos_token_id=tokenizer.eos_token_id,
+        )
+    print("Generation finished.", flush=True)
+    print(f"Generation took {time.time() - t0:.1f}s", flush=True)
+
+    generated_ids = outputs[0][inputs["input_ids"].shape[1]:]
+    text = tokenizer.decode(generated_ids, skip_special_tokens=True)
+
+    return extract_first_json_object(text)
+
 
 def load_tests(path):
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
-def generate(model, tokenizer, prompt):
+def smoke_test_forward(model, tokenizer, prompt):
     inputs = tokenizer(prompt, return_tensors="pt")
     if torch.backends.mps.is_available():
         inputs = {k: v.to("mps") for k, v in inputs.items()}
 
-    with torch.no_grad():
-        outputs = model.generate(
-            **inputs,
-            max_new_tokens=300,
-            do_sample=False,
-            temperature=0.0,
-            pad_token_id=tokenizer.eos_token_id,
-        )
-
-    text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    if "Now solve this:" in text:
-        text = text.split("Now solve this:")[-1]
-    if "Input:" in text and "{" in text:
-        text = text[text.find("{"):]
-    return text.strip()
+    print("Starting forward pass...", flush=True)
+    with torch.inference_mode():
+        out = model(**inputs)
+    print("Forward pass finished.", flush=True)
+    print("Logits shape:", out.logits.shape, flush=True)
 
 def main():
     import argparse
@@ -136,24 +87,41 @@ def main():
     parser.add_argument("--output", default="heldout_eval_lora_results.json")
     args = parser.parse_args()
 
+    print("Loading tokenizer...")
     tokenizer = AutoTokenizer.from_pretrained(args.base_model, use_fast=True)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
 
+    print("Loading base model...")
     dtype = torch.float16 if torch.backends.mps.is_available() else torch.float32
     base_model = AutoModelForCausalLM.from_pretrained(args.base_model, dtype=dtype)
+
+    print("Loading LoRA adapter...")
     model = PeftModel.from_pretrained(base_model, args.adapter_path)
+
+    print("Merging LoRA (important for speed)...")
+    model = model.merge_and_unload()
 
     if torch.backends.mps.is_available():
         model = model.to("mps")
+
     model.eval()
 
     tests = load_tests(args.tests)
+
+    # 🔥 START SMALL
+    tests = tests[:1]
+
     results = []
 
-    for test in tests:
+    for i, test in enumerate(tests, start=1):
+        print(f"\nRunning test {i}/{len(tests)}: {test['name']}", flush=True)
+
         prompt = build_prompt(test["payload"])
-        raw = generate(model, tokenizer, prompt)
+        #raw = generate(model, tokenizer, prompt)
+        smoke_test_forward(model, tokenizer, prompt)
+        return
+        print("Raw output:", raw, "\n")
 
         try:
             obj = json.loads(raw)
@@ -167,7 +135,7 @@ def main():
             ok = len(errors) == 0
         except Exception as e:
             obj = None
-            errors = [f"Could not parse JSON: {e}", f"Raw output: {raw[:700]}"]
+            errors = [f"Could not parse JSON: {e}"]
             ok = False
 
         results.append({
@@ -179,9 +147,10 @@ def main():
         })
 
     Path(args.output).write_text(json.dumps(results, indent=2), encoding="utf-8")
+
     passed = sum(1 for r in results if r["ok"])
-    print(f"Passed {passed}/{len(results)}. Results written to {args.output}")
+    print(f"\nPassed {passed}/{len(results)}")
+
 
 if __name__ == "__main__":
     main()
-    
