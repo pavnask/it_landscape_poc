@@ -1,0 +1,329 @@
+[
+  {
+    "name": "support_portal_sales",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['relations']"
+    ],
+    "raw_output": "{\"elements\": [{\"id\": \"app_ticketing_system\", \"type\": \"application\", \"name\": \"Ticketing System\", \"domain\": \"Support\", \"owner\": \"team_service_ops\", \"environment\": \"prod\", \"technology\": \"Node.js\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_ticketing_system",
+          "type": "application",
+          "name": "Ticketing System",
+          "domain": "Support",
+          "owner": "team_service_ops",
+          "environment": "prod",
+          "technology": "Node.js"
+        }
+      ]
+    }
+  },
+  {
+    "name": "inventory_api_ops",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['elements', 'relations']",
+      "Unexpected top-level keys: ['landscape_context', 'task']"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"api_stock_api_v1\", \"type\": \"api\", \"name\": \"Stock API v1\", \"domain\": \"Operations\", \"owner\": \"team_supply_platform\", \"environment\": \"prod\", \"technology\": \"ExpressJS\"}]}, \"task\": \"Connect the inventory service to the API.\"}",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "api_stock_api_v1",
+            "type": "api",
+            "name": "Stock API v1",
+            "domain": "Operations",
+            "owner": "team_supply_platform",
+            "environment": "prod",
+            "technology": "ExpressJS"
+          }
+        ]
+      },
+      "task": "Connect the inventory service to the API."
+    }
+  },
+  {
+    "name": "claims_db_insurance",
+    "ok": true,
+    "errors": [],
+    "raw_output": "{\"elements\": [{\"id\": \"db_records\", \"type\": \"database\", \"name\": \"RecordsDB\", \"owner\": \"team_claims_platform\", \"environment\": \"prod\", \"technology\": \"MongoDB\"}], \"relations\": [{\"source\": \"app_claims_core\", \"type\": \"reads_from\", \"target\": \"db_records\"}, {\"source\": \"app_claims_core\", \"type\": \"writes_to\", \"target\": \"db_records\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "db_records",
+          "type": "database",
+          "name": "RecordsDB",
+          "owner": "team_claims_platform",
+          "environment": "prod",
+          "technology": "MongoDB"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_claims_core",
+          "type": "reads_from",
+          "target": "db_records"
+        },
+        {
+          "source": "app_claims_core",
+          "type": "writes_to",
+          "target": "db_records"
+        }
+      ]
+    }
+  },
+  {
+    "name": "billing_api_finance",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['elements', 'relations']",
+      "Unexpected top-level keys: ['landscape_context', 'task']"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"service_bill_api\", \"type\": \"api\", \"name\": \"Bill API\", \"owner\": \"team_finance_platform\", \"environment\": \"prod\", \"technology\": \"Node.js\"}], \"relations\": [{\"source\": \"service_bill_api\", \"type\": \"exposes\", \"target\": \"cap_billing\"}]}, \"task\": \"Integrate the Bill API into existing ERP systems.\"}",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "service_bill_api",
+            "type": "api",
+            "name": "Bill API",
+            "owner": "team_finance_platform",
+            "environment": "prod",
+            "technology": "Node.js"
+          }
+        ],
+        "relations": [
+          {
+            "source": "service_bill_api",
+            "type": "exposes",
+            "target": "cap_billing"
+          }
+        ]
+      },
+      "task": "Integrate the Bill API into existing ERP systems."
+    }
+  },
+  {
+    "name": "catalog_db_retail",
+    "ok": false,
+    "errors": [
+      "Relation 1 type 'supports' is not allowed from application to database",
+      "Missing required relation types: ['reads_from', 'writes_to']"
+    ],
+    "raw_output": "{\"elements\": [{\"id\": \"db_products\", \"type\": \"database\", \"name\": \"ProductsDB\", \"owner\": \"team_catalog_platform\", \"environment\": \"prod\", \"technology\": \"MongoDB\"}], \"relations\": [{\"source\": \"app_catalog\", \"type\": \"uses\", \"target\": \"db_products\"}, {\"source\": \"app_catalog\", \"type\": \"supports\", \"target\": \"db_products\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "db_products",
+          "type": "database",
+          "name": "ProductsDB",
+          "owner": "team_catalog_platform",
+          "environment": "prod",
+          "technology": "MongoDB"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_catalog",
+          "type": "uses",
+          "target": "db_products"
+        },
+        {
+          "source": "app_catalog",
+          "type": "supports",
+          "target": "db_products"
+        }
+      ]
+    }
+  },
+  {
+    "name": "shipment_tracking_logistics",
+    "ok": true,
+    "errors": [],
+    "raw_output": "{\"elements\": [{\"id\": \"app_shipment_tracker\", \"type\": \"application\", \"name\": \"Shipment Tracker\", \"domain\": \"Logistics\", \"owner\": \"team_logistics_platform\", \"environment\": \"prod\", \"technology\": \"Node.js\"}], \"relations\": [{\"source\": \"app_shipment_tracker\", \"type\": \"uses\", \"target\": \"app_warehouse\"}, {\"source\": \"app_shipment_tracker\", \"type\": \"supports\", \"target\": \"cap_shipments\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_shipment_tracker",
+          "type": "application",
+          "name": "Shipment Tracker",
+          "domain": "Logistics",
+          "owner": "team_logistics_platform",
+          "environment": "prod",
+          "technology": "Node.js"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_shipment_tracker",
+          "type": "uses",
+          "target": "app_warehouse"
+        },
+        {
+          "source": "app_shipment_tracker",
+          "type": "supports",
+          "target": "cap_shipments"
+        }
+      ]
+    }
+  },
+  {
+    "name": "policy_portal_insurance",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['relations']"
+    ],
+    "raw_output": "{\"elements\": [{\"id\": \"portal_customer_portal\", \"type\": \"application\", \"name\": \"Customer Portal\", \"domain\": \"Insurance\", \"owner\": \"team_policy_platform\", \"environment\": \"prod\", \"technology\": \"ReactJS\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "portal_customer_portal",
+          "type": "application",
+          "name": "Customer Portal",
+          "domain": "Insurance",
+          "owner": "team_policy_platform",
+          "environment": "prod",
+          "technology": "ReactJS"
+        }
+      ]
+    }
+  },
+  {
+    "name": "payment_gateway_commerce",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['elements', 'relations']",
+      "Unexpected top-level keys: ['landscape_context', 'task']"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"api_payment_gateway\", \"type\": \"api\", \"name\": \"Payment Gateway API\", \"domain\": \"Commerce\", \"owner\": \"team_fintech_ops\", \"environment\": \"prod\", \"technology\": \"REST\"}]}, \"task\": \"Connect the Payment Gateway API to the Checkout Service.\"}",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "api_payment_gateway",
+            "type": "api",
+            "name": "Payment Gateway API",
+            "domain": "Commerce",
+            "owner": "team_fintech_ops",
+            "environment": "prod",
+            "technology": "REST"
+          }
+        ]
+      },
+      "task": "Connect the Payment Gateway API to the Checkout Service."
+    }
+  },
+  {
+    "name": "customer_analytics_data",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['relations']"
+    ],
+    "raw_output": "{\"elements\": [{\"id\": \"app_customers_analysis_engine\", \"type\": \"application\", \"name\": \"Customers Analysis Engine\", \"domain\": \"Analytics\", \"owner\": \"team_data_analytics\", \"environment\": \"prod\", \"technology\": \"Scala\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_customers_analysis_engine",
+          "type": "application",
+          "name": "Customers Analysis Engine",
+          "domain": "Analytics",
+          "owner": "team_data_analytics",
+          "environment": "prod",
+          "technology": "Scala"
+        }
+      ]
+    }
+  },
+  {
+    "name": "notifications_engagement",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['elements', 'relations']",
+      "Unexpected top-level keys: ['landscape_context', 'task']"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"service_notification_api\", \"type\": \"api\", \"name\": \"Notification API\", \"domain\": \"Marketing\", \"owner\": \"team_marketing_platform\", \"environment\": \"prod\", \"technology\": \"Node.js\"}]}, \"task\": \"Integrate the Notification API into CRM Core.\"}",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "service_notification_api",
+            "type": "api",
+            "name": "Notification API",
+            "domain": "Marketing",
+            "owner": "team_marketing_platform",
+            "environment": "prod",
+            "technology": "Node.js"
+          }
+        ]
+      },
+      "task": "Integrate the Notification API into CRM Core."
+    }
+  },
+  {
+    "name": "partner_orders_b2b",
+    "ok": false,
+    "errors": [
+      "Relation 1 type 'supports' is not allowed from application to api"
+    ],
+    "raw_output": "{\"elements\": [{\"id\": \"api_partner_api\", \"type\": \"api\", \"name\": \"PartnerAPI\", \"domain\": \"Commerce\", \"owner\": \"team_b2b\", \"environment\": \"prod\", \"technology\": \"REST\"}], \"relations\": [{\"source\": \"app_orders\", \"type\": \"uses\", \"target\": \"api_partner_api\"}, {\"source\": \"app_orders\", \"type\": \"supports\", \"target\": \"api_partner_api\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "api_partner_api",
+          "type": "api",
+          "name": "PartnerAPI",
+          "domain": "Commerce",
+          "owner": "team_b2b",
+          "environment": "prod",
+          "technology": "REST"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_orders",
+          "type": "uses",
+          "target": "api_partner_api"
+        },
+        {
+          "source": "app_orders",
+          "type": "supports",
+          "target": "api_partner_api"
+        }
+      ]
+    }
+  },
+  {
+    "name": "forecasting_manufacturing",
+    "ok": true,
+    "errors": [],
+    "raw_output": "{\"elements\": [{\"id\": \"app_demand_analyzer\", \"type\": \"application\", \"name\": \"Demand Analyzer\", \"domain\": \"Operations\", \"owner\": \"team_supply_analytics\", \"environment\": \"prod\", \"technology\": \"Java\"}], \"relations\": [{\"source\": \"app_demand_analyzer\", \"type\": \"uses\", \"target\": \"app_inventory\"}, {\"source\": \"app_demand_analyzer\", \"type\": \"supports\", \"target\": \"cap_forecasting\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_demand_analyzer",
+          "type": "application",
+          "name": "Demand Analyzer",
+          "domain": "Operations",
+          "owner": "team_supply_analytics",
+          "environment": "prod",
+          "technology": "Java"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_demand_analyzer",
+          "type": "uses",
+          "target": "app_inventory"
+        },
+        {
+          "source": "app_demand_analyzer",
+          "type": "supports",
+          "target": "cap_forecasting"
+        }
+      ]
+    }
+  }
+]

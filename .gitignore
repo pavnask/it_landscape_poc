@@ -1,5 +1,9 @@
 lora_qwen_1_5b
 lora_qwen_1_5b/checkpoint-20
+lora_qwen_1_5b_v2
+lora_qwen_1_5b_v2/checkpoint-22
+lora_qwen_1_5b_v3
+lora_qwen_1_5b_v3/checkpoint-21
 lora_out
 lora_out/checkpoint-20
 lora_out/.DS_Store

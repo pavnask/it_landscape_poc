@@ -1,0 +1,327 @@
+[
+  {
+    "name": "support_portal_sales",
+    "ok": true,
+    "errors": [],
+    "raw_output": "{'elements': [{'id': 'app_ticketing_system', 'type': 'application', 'name': 'Ticketing System', 'domain': 'Support', 'owner': 'team_service_ops', 'environment': 'prod', 'technology': 'Node.js'}], 'relations': [{'source': 'app_ticketing_system', 'type': 'uses', 'target': 'app_crm'}, {'source': 'app_ticketing_system', 'type': 'supports', 'target': 'cap_customer_support'}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_ticketing_system",
+          "type": "application",
+          "name": "Ticketing System",
+          "domain": "Support",
+          "owner": "team_service_ops",
+          "environment": "prod",
+          "technology": "Node.js"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_ticketing_system",
+          "type": "uses",
+          "target": "app_crm"
+        },
+        {
+          "source": "app_ticketing_system",
+          "type": "supports",
+          "target": "cap_customer_support"
+        }
+      ]
+    }
+  },
+  {
+    "name": "inventory_api_ops",
+    "ok": false,
+    "errors": [
+      "Could not parse/validate output: unterminated string literal (detected at line 1) (<unknown>, line 1)"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"cap_inventory\", \"type\": \"business_capability\", \"name\": \"Inventory Management\", \"owner\": \"team_supply_chain\", \"environment\": \"prod\"}, {\"id\": \"app_inventory\", \"type\": \"application\", \"name\": \"Inventory Service\", \"domain\": \"Operations\", \"owner\": \"team_supply_platform\", \"environment\": \"prod\", \"technology\": \"Node.js\"}], \"relations\": [{\"source\": \"app_inventory\", \"type\": \"uses\", \"target\": \"api_stock_query\"}, {\"source\": \"app_inventory\", \"type\": \"supports\", \"target\": \"cap_inventory\"}]}, \"task\": \"Int",
+    "parsed_output": null
+  },
+  {
+    "name": "claims_db_insurance",
+    "ok": false,
+    "errors": [
+      "Could not parse/validate output: '{' was never closed (<unknown>, line 1)"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"cap_claims\", \"type\": \"business_capability\", \"name\": \"Claims Processing\", \"owner\": \"team_claims\", \"environment\": \"prod\"}, {\"id\": \"app_claims_core\", \"type\": \"application\", \"name\": \"Claims Core\", \"domain\": \"Insurance\", \"owner\": \"team_claims_platform\", \"environment\": \"prod\", \"technology\": \"Java\"}, {\"id\": \"db_claim_records\", \"type\": \"database\", \"name\": \"Claim Records DB\", \"owner\": \"team_claims_platform\", \"environment\": \"prod\", \"technology\": \"MongoDB\"}], \"relations\":",
+    "parsed_output": null
+  },
+  {
+    "name": "billing_api_finance",
+    "ok": false,
+    "errors": [
+      "Relation 0 type 'exposes' is not allowed from api to business_capability",
+      "Missing required relation types: ['supports']"
+    ],
+    "raw_output": "{'elements': [{'id': 'service_bill_api', 'type': 'api', 'name': 'Bill API', 'domain': 'Finance', 'owner': 'team_finance_platform', 'environment': 'prod'}], 'relations': [{'source': 'service_bill_api', 'type': 'exposes', 'target': 'cap_billing'}, {'source': 'app_erp', 'type': 'uses', 'target': 'service_bill_api'}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "service_bill_api",
+          "type": "api",
+          "name": "Bill API",
+          "domain": "Finance",
+          "owner": "team_finance_platform",
+          "environment": "prod"
+        }
+      ],
+      "relations": [
+        {
+          "source": "service_bill_api",
+          "type": "exposes",
+          "target": "cap_billing"
+        },
+        {
+          "source": "app_erp",
+          "type": "uses",
+          "target": "service_bill_api"
+        }
+      ]
+    }
+  },
+  {
+    "name": "catalog_db_retail",
+    "ok": false,
+    "errors": [
+      "Relation 1 type 'supports' is not allowed from application to database",
+      "Missing required relation types: ['reads_from', 'writes_to']"
+    ],
+    "raw_output": "{'elements': [{'id': 'db_products', 'type': 'database', 'name': 'ProductsDB', 'owner': 'team_catalog_platform', 'environment': 'prod', 'technology': 'MongoDB'}], 'relations': [{'source': 'app_catalog', 'type': 'uses', 'target': 'db_products'}, {'source': 'app_catalog', 'type': 'supports', 'target': 'db_products'}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "db_products",
+          "type": "database",
+          "name": "ProductsDB",
+          "owner": "team_catalog_platform",
+          "environment": "prod",
+          "technology": "MongoDB"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_catalog",
+          "type": "uses",
+          "target": "db_products"
+        },
+        {
+          "source": "app_catalog",
+          "type": "supports",
+          "target": "db_products"
+        }
+      ]
+    }
+  },
+  {
+    "name": "shipment_tracking_logistics",
+    "ok": true,
+    "errors": [],
+    "raw_output": "{'elements': [{'id': 'app_shipment_tracking', 'type': 'application', 'name': 'Shipment Tracking Service', 'domain': 'Logistics', 'owner': 'team_logistics_platform', 'environment': 'prod', 'technology': 'Node.js'}], 'relations': [{'source': 'app_shipment_tracking', 'type': 'uses', 'target': 'app_warehouse'}, {'source': 'app_shipment_tracking', 'type': 'supports', 'target': 'cap_shipments'}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_shipment_tracking",
+          "type": "application",
+          "name": "Shipment Tracking Service",
+          "domain": "Logistics",
+          "owner": "team_logistics_platform",
+          "environment": "prod",
+          "technology": "Node.js"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_shipment_tracking",
+          "type": "uses",
+          "target": "app_warehouse"
+        },
+        {
+          "source": "app_shipment_tracking",
+          "type": "supports",
+          "target": "cap_shipments"
+        }
+      ]
+    }
+  },
+  {
+    "name": "policy_portal_insurance",
+    "ok": true,
+    "errors": [],
+    "raw_output": "{'elements': [{'id': 'app_policy_portal', 'type': 'application', 'name': 'Policy Portal', 'domain': 'Insurance', 'owner': 'team_policy_platform', 'environment': 'prod', 'technology': 'React'}], 'relations': [{'source': 'app_policy_portal', 'type': 'uses', 'target': 'app_policy_admin'}, {'source': 'app_policy_portal', 'type': 'supports', 'target': 'cap_policy_lookup'}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_policy_portal",
+          "type": "application",
+          "name": "Policy Portal",
+          "domain": "Insurance",
+          "owner": "team_policy_platform",
+          "environment": "prod",
+          "technology": "React"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_policy_portal",
+          "type": "uses",
+          "target": "app_policy_admin"
+        },
+        {
+          "source": "app_policy_portal",
+          "type": "supports",
+          "target": "cap_policy_lookup"
+        }
+      ]
+    }
+  },
+  {
+    "name": "payment_gateway_commerce",
+    "ok": false,
+    "errors": [
+      "Relation 1 type 'supports' is not allowed from application to api"
+    ],
+    "raw_output": "{'elements': [{'id': 'api_payment_gateway', 'type': 'api', 'name': 'Payment Gateway API', 'domain': 'Finance', 'owner': 'team_fintech_ops', 'environment': 'prod'}], 'relations': [{'source': 'app_checkout', 'type': 'uses', 'target': 'api_payment_gateway'}, {'source': 'app_checkout', 'type': 'supports', 'target': 'api_payment_gateway'}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "api_payment_gateway",
+          "type": "api",
+          "name": "Payment Gateway API",
+          "domain": "Finance",
+          "owner": "team_fintech_ops",
+          "environment": "prod"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_checkout",
+          "type": "uses",
+          "target": "api_payment_gateway"
+        },
+        {
+          "source": "app_checkout",
+          "type": "supports",
+          "target": "api_payment_gateway"
+        }
+      ]
+    }
+  },
+  {
+    "name": "customer_analytics_data",
+    "ok": true,
+    "errors": [],
+    "raw_output": "{'elements': [{'id': 'app_analytics', 'type': 'application', 'name': 'Analytics App', 'domain': 'Marketing', 'owner': 'team_data_analytics', 'environment': 'prod', 'technology': 'Scala'}], 'relations': [{'source': 'app_analytics', 'type': 'uses', 'target': 'app_crm'}, {'source': 'app_analytics', 'type': 'supports', 'target': 'cap_customer_analytics'}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_analytics",
+          "type": "application",
+          "name": "Analytics App",
+          "domain": "Marketing",
+          "owner": "team_data_analytics",
+          "environment": "prod",
+          "technology": "Scala"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_analytics",
+          "type": "uses",
+          "target": "app_crm"
+        },
+        {
+          "source": "app_analytics",
+          "type": "supports",
+          "target": "cap_customer_analytics"
+        }
+      ]
+    }
+  },
+  {
+    "name": "notifications_engagement",
+    "ok": false,
+    "errors": [
+      "Expected at least one new element of type 'application', got ['api']",
+      "Relation 1 type 'supports' is not allowed from api to application"
+    ],
+    "raw_output": "{'elements': [{'id': 'service_notification', 'type': 'api', 'name': 'Notification API', 'domain': 'Marketing', 'owner': 'team_marketing_platform', 'environment': 'prod'}], 'relations': [{'source': 'app_crm', 'type': 'uses', 'target': 'service_notification'}, {'source': 'service_notification', 'type': 'supports', 'target': 'app_crm'}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "service_notification",
+          "type": "api",
+          "name": "Notification API",
+          "domain": "Marketing",
+          "owner": "team_marketing_platform",
+          "environment": "prod"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_crm",
+          "type": "uses",
+          "target": "service_notification"
+        },
+        {
+          "source": "service_notification",
+          "type": "supports",
+          "target": "app_crm"
+        }
+      ]
+    }
+  },
+  {
+    "name": "partner_orders_b2b",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['elements', 'relations']",
+      "Unexpected top-level keys: ['landscape_context', 'task']"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"api_partner_api\", \"type\": \"api\", \"name\": \"Partner API\", \"domain\": \"Commerce\", \"owner\": \"team_order_platform\", \"environment\": \"prod\", \"technology\": \"REST\"}], \"relations\": []}, \"task\": \"Integrate Partner API into existing system.\"}",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "api_partner_api",
+            "type": "api",
+            "name": "Partner API",
+            "domain": "Commerce",
+            "owner": "team_order_platform",
+            "environment": "prod",
+            "technology": "REST"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Integrate Partner API into existing system."
+    }
+  },
+  {
+    "name": "forecasting_manufacturing",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['elements', 'relations']",
+      "Unexpected top-level keys: ['landscape_context', 'task']"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"app_salesforce_integration\", \"type\": \"api\", \"name\": \"Salesforce Integration API\", \"domain\": \"Marketing\", \"owner\": \"team_marketing_platform\", \"environment\": \"prod\", \"technology\": \"REST\"}], \"relations\": []}, \"task\": \"Integrate Salesforce into the existing system to support demand forecasting.\"}",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "app_salesforce_integration",
+            "type": "api",
+            "name": "Salesforce Integration API",
+            "domain": "Marketing",
+            "owner": "team_marketing_platform",
+            "environment": "prod",
+            "technology": "REST"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Integrate Salesforce into the existing system to support demand forecasting."
+    }
+  }
+]

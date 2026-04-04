@@ -1,10 +1,11 @@
+import ast
 import json
 import time
 from pathlib import Path
 
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from semantic_validator import validate_output_obj
 
@@ -21,11 +22,12 @@ def extract_first_json_object(text: str) -> str:
         elif ch == "}":
             depth -= 1
             if depth == 0:
-                return text[start:i+1]
+                return text[start : i + 1]
+
     return text[start:].strip()
 
 
-def build_prompt(payload):
+def build_prompt(payload: dict) -> str:
     example_input = {
         "landscape_context": {
             "elements": [
@@ -34,7 +36,7 @@ def build_prompt(payload):
                     "type": "business_capability",
                     "name": "Order Management",
                     "owner": "team_ops",
-                    "environment": "prod"
+                    "environment": "prod",
                 },
                 {
                     "id": "app_order_service",
@@ -43,12 +45,12 @@ def build_prompt(payload):
                     "domain": "Operations",
                     "owner": "team_order_platform",
                     "environment": "prod",
-                    "technology": "Python"
-                }
+                    "technology": "Python",
+                },
             ],
-            "relations": []
+            "relations": [],
         },
-        "task": "Add a database for persistent order storage and connect it."
+        "task": "Add a database for persistent order storage and connect it.",
     }
 
     example_output = {
@@ -59,42 +61,42 @@ def build_prompt(payload):
                 "name": "OrdersDB",
                 "owner": "team_order_platform",
                 "environment": "prod",
-                "technology": "PostgreSQL"
+                "technology": "PostgreSQL",
             }
         ],
         "relations": [
             {
                 "source": "app_order_service",
                 "type": "reads_from",
-                "target": "db_orders"
+                "target": "db_orders",
             },
             {
                 "source": "app_order_service",
                 "type": "writes_to",
-                "target": "db_orders"
-            }
-        ]
+                "target": "db_orders",
+            },
+        ],
     }
 
     return (
         "You are a strict JSON generator.\n"
-        "Return ONLY one JSON object with exactly these top-level keys:\n"
+        "Return ONLY one object with exactly these top-level keys:\n"
         '{"elements": [...], "relations": [...]}'
         "\n\nRules:\n"
-        "- Output JSON only\n"
+        "- Output only the new elements and new relations\n"
         "- Do not output landscape_context\n"
         "- Do not repeat the input\n"
-        "- Generate only NEW elements and NEW relations\n"
+        "- Prefer strict JSON with double quotes\n"
         "- Allowed element types: application, database, api, team, business_capability\n"
         "- Allowed relation types: owns, uses, reads_from, writes_to, exposes, supports\n"
-        "- If unsure, return {\"elements\":[],\"relations\":[]}\n\n"
+        '- If unsure, return {"elements":[],"relations":[]}\n\n'
         f"Example input:\n{json.dumps(example_input)}\n\n"
         f"Example output:\n{json.dumps(example_output)}\n\n"
         f"Now solve this input:\n{json.dumps(payload)}\n"
     )
 
 
-def generate(model, tokenizer, prompt):
+def generate(model, tokenizer, prompt: str) -> str:
     inputs = tokenizer(prompt, return_tensors="pt")
 
     if torch.backends.mps.is_available():
@@ -102,8 +104,6 @@ def generate(model, tokenizer, prompt):
 
     print(f"Prompt tokens: {inputs['input_ids'].shape[1]}", flush=True)
     print("Starting generation...", flush=True)
-
-    import time
     t0 = time.time()
 
     with torch.inference_mode():
@@ -119,27 +119,29 @@ def generate(model, tokenizer, prompt):
 
     print(f"Generation finished in {time.time() - t0:.1f}s", flush=True)
 
-    generated_ids = outputs[0][inputs["input_ids"].shape[1]:]
+    generated_ids = outputs[0][inputs["input_ids"].shape[1] :]
     text = tokenizer.decode(generated_ids, skip_special_tokens=True)
     return extract_first_json_object(text)
 
 
-def load_tests(path):
+def parse_model_output(raw: str) -> dict:
+    raw = raw.strip()
+
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        pass
+
+    return ast.literal_eval(raw)
+
+
+def load_tests(path: str) -> list[dict]:
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
-def smoke_test_forward(model, tokenizer, prompt):
-    inputs = tokenizer(prompt, return_tensors="pt")
-    if torch.backends.mps.is_available():
-        inputs = {k: v.to("mps") for k, v in inputs.items()}
 
-    print("Starting forward pass...", flush=True)
-    with torch.inference_mode():
-        out = model(**inputs)
-    print("Forward pass finished.", flush=True)
-    print("Logits shape:", out.logits.shape, flush=True)
-
-def main():
+def main() -> None:
     import argparse
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--base_model", required=True)
     parser.add_argument("--adapter_path", default="lora_out")
@@ -168,10 +170,6 @@ def main():
     model.eval()
 
     tests = load_tests(args.tests)
-
-    # 🔥 START SMALL
-    #tests = tests[:1]
-
     results = []
 
     for i, test in enumerate(tests, start=1):
@@ -179,12 +177,11 @@ def main():
 
         prompt = build_prompt(test["payload"])
         raw = generate(model, tokenizer, prompt)
-        #smoke_test_forward(model, tokenizer, prompt)
-        #return
-        print("Raw output:", raw, "\n")
+
+        print("Raw output:", raw, "\n", flush=True)
 
         try:
-            obj = json.loads(raw)
+            obj = parse_model_output(raw)
             errors = validate_output_obj(
                 obj,
                 context=test["payload"].get("landscape_context", {}),
@@ -195,21 +192,23 @@ def main():
             ok = len(errors) == 0
         except Exception as e:
             obj = None
-            errors = [f"Could not parse JSON: {e}"]
+            errors = [f"Could not parse/validate output: {e}"]
             ok = False
 
-        results.append({
-            "name": test["name"],
-            "ok": ok,
-            "errors": errors,
-            "raw_output": raw,
-            "parsed_output": obj,
-        })
+        results.append(
+            {
+                "name": test["name"],
+                "ok": ok,
+                "errors": errors,
+                "raw_output": raw,
+                "parsed_output": obj,
+            }
+        )
 
     Path(args.output).write_text(json.dumps(results, indent=2), encoding="utf-8")
 
     passed = sum(1 for r in results if r["ok"])
-    print(f"\nPassed {passed}/{len(results)}")
+    print(f"\nPassed {passed}/{len(results)}. Results written to {args.output}")
 
 
 if __name__ == "__main__":
