@@ -1,0 +1,326 @@
+[
+  {
+    "name": "support_portal_sales",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['elements', 'relations']",
+      "Unexpected top-level keys: ['landscape_context', 'task']"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"app_ticketing_system\", \"type\": \"application\", \"name\": \"Ticketing System\", \"domain\": \"Support\", \"owner\": \"team_service_ops\", \"environment\": \"prod\", \"technology\": \"Python\"}], \"relations\": [{\"source\": \"app_ticketing_system\", \"type\": \"uses\", \"target\": \"app_crm\"}, {\"source\": \"app_ticketing_system\", \"type\": \"supports\", \"target\": \"cap_customer_support\"}]}, \"task\": \"Connect the new ticketing system to the CRM core.\"}",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "app_ticketing_system",
+            "type": "application",
+            "name": "Ticketing System",
+            "domain": "Support",
+            "owner": "team_service_ops",
+            "environment": "prod",
+            "technology": "Python"
+          }
+        ],
+        "relations": [
+          {
+            "source": "app_ticketing_system",
+            "type": "uses",
+            "target": "app_crm"
+          },
+          {
+            "source": "app_ticketing_system",
+            "type": "supports",
+            "target": "cap_customer_support"
+          }
+        ]
+      },
+      "task": "Connect the new ticketing system to the CRM core."
+    }
+  },
+  {
+    "name": "inventory_api_ops",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['elements', 'relations']",
+      "Unexpected top-level keys: ['landscape_context', 'task']"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"cap_inventory\", \"type\": \"business_capability\", \"name\": \"Inventory Management\", \"owner\": \"team_supply_chain\", \"environment\": \"prod\"}, {\"id\": \"app_inventory_api\", \"type\": \"api\", \"name\": \"Inventory API\", \"domain\": \"Operations\", \"owner\": \"team_supply_platform\", \"environment\": \"prod\", \"technology\": \"Python\"}], \"relations\": []}, \"task\": \"Integrate the new API into existing workflows to improve efficiency.\"}",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "cap_inventory",
+            "type": "business_capability",
+            "name": "Inventory Management",
+            "owner": "team_supply_chain",
+            "environment": "prod"
+          },
+          {
+            "id": "app_inventory_api",
+            "type": "api",
+            "name": "Inventory API",
+            "domain": "Operations",
+            "owner": "team_supply_platform",
+            "environment": "prod",
+            "technology": "Python"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Integrate the new API into existing workflows to improve efficiency."
+    }
+  },
+  {
+    "name": "claims_db_insurance",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['elements', 'relations']",
+      "Unexpected top-level keys: ['landscape_context', 'task']"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"db_claimstore\", \"type\": \"database\", \"name\": \"ClaimStore\", \"domain\": \"Insurance\", \"owner\": \"team_dataops\", \"environment\": \"prod\", \"technology\": \"MongoDB\"}], \"relations\": []}, \"task\": \"Connect the new database to the existing application.\"}",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "db_claimstore",
+            "type": "database",
+            "name": "ClaimStore",
+            "domain": "Insurance",
+            "owner": "team_dataops",
+            "environment": "prod",
+            "technology": "MongoDB"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Connect the new database to the existing application."
+    }
+  },
+  {
+    "name": "billing_api_finance",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['elements', 'relations']",
+      "Unexpected top-level keys: ['landscape_context', 'task']"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"service_api_gateway\", \"type\": \"api\", \"name\": \"API Gateway\", \"domain\": \"Operations\", \"owner\": \"team_operations_devops\", \"environment\": \"prod\", \"technology\": \"Node.js\"}], \"relations\": []}, \"task\": \"Integrate the new API into existing infrastructure.\"}",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "service_api_gateway",
+            "type": "api",
+            "name": "API Gateway",
+            "domain": "Operations",
+            "owner": "team_operations_devops",
+            "environment": "prod",
+            "technology": "Node.js"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Integrate the new API into existing infrastructure."
+    }
+  },
+  {
+    "name": "catalog_db_retail",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['elements', 'relations']",
+      "Unexpected top-level keys: ['landscape_context', 'task']"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"db_prod_db_1024\", \"type\": \"database\", \"name\": \"Prod DB 1024\", \"domain\": \"Retail\", \"owner\": \"team_database_administration\", \"environment\": \"prod\", \"technology\": \"PostgreSQL\"}], \"relations\": []}, \"task\": \"Connect the new database to the existing application.\"}",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "db_prod_db_1024",
+            "type": "database",
+            "name": "Prod DB 1024",
+            "domain": "Retail",
+            "owner": "team_database_administration",
+            "environment": "prod",
+            "technology": "PostgreSQL"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Connect the new database to the existing application."
+    }
+  },
+  {
+    "name": "shipment_tracking_logistics",
+    "ok": false,
+    "errors": [
+      "Could not parse/validate output: unterminated string literal (detected at line 2) (<unknown>, line 2)"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"cap_shipments\", \"type\": \"business_capability\", \"name\": \"Shipment Tracking\", \"owner\": \"team_logistics\", \"environment\": \"prod\"}, {\"id\": \"app_warehouse_service\", \"type\": \"application\", \"name\": \"Warehouse Service\", \"domain\": \"Logistics\", \"owner\": \"team_logistics_platform\", \"environment\": \"prod\", \"technology\": \"Java\"}], \"relations\": [{\"source\": \"app_warehouse_service\", \"type\": \"uses\", \"target\": \"cap_shipments\"}, {\"source\": \"app_warehouse_service\", \"type\": \"reads_from\", \"target\": \"cap_shipments\"}]}</code>\n{\"elements\":[{\"id\":\"app_new_app\",\"type\":\"application\",\"name\":\"New App\",\"domain\":\"Finance\",\"owner\":\"team_finance\",\"environment\":\"dev\"},{\"id\":\"db_new_db\",\"type\":\"database\",\"name\":\"New DB\",\"domain\":\"Finance\",\"owner\":\"team_finance\",\"environment\":\"dev\"}],\"relations\":[{\"source\":\"app_new_app\",\"type\":\"",
+    "parsed_output": null
+  },
+  {
+    "name": "policy_portal_insurance",
+    "ok": false,
+    "errors": [
+      "Could not parse/validate output: ':' expected after dictionary key (<unknown>, line 1)"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"cap_policy_lookup\", \"type\": \"business_capability\", \"name\": \"Policy Lookup\", \"owner\": \"team_insurance_ops\", \"environment\": \"prod\"}, {\"id\": \"app_policy_admin\", \"type\": \"application\", \"name\": \"Policy Administration\", \"domain\": \"Insurance\", \"owner\": \"team_policy_platform\", \"environment\": \"prod\", \"technology\": \"Java\"}], \"relations\": [[\"uses\", \"app_policy_admin\"], [\"supports\", \"cap_policy_lookup\"]]}, {}}",
+    "parsed_output": null
+  },
+  {
+    "name": "payment_gateway_commerce",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['elements', 'relations']",
+      "Unexpected top-level keys: ['landscape_context', 'task']"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"api_gateway_payment\", \"type\": \"api\", \"name\": \"Payment Gateway API\", \"domain\": \"Finance\", \"owner\": \"team_fintech_platform\", \"environment\": \"prod\", \"technology\": \"Node.js\"}], \"relations\": []}, \"task\": \"Integrate the new Payment Gateway API into the existing system.\"}",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "api_gateway_payment",
+            "type": "api",
+            "name": "Payment Gateway API",
+            "domain": "Finance",
+            "owner": "team_fintech_platform",
+            "environment": "prod",
+            "technology": "Node.js"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Integrate the new Payment Gateway API into the existing system."
+    }
+  },
+  {
+    "name": "customer_analytics_data",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['elements', 'relations']",
+      "Unexpected top-level keys: ['landscape_context']"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"app_crm\", \"type\": \"application\", \"name\": \"CRM Core\", \"domain\": \"Sales\", \"owner\": \"team_sales_platform\", \"environment\": \"prod\", \"technology\": \"Java\"}, {\"id\": \"app_analytics_service\", \"type\": \"application\", \"name\": \"Analytics Service\", \"domain\": \"Marketing\", \"owner\": \"team_marketing_platform\", \"environment\": \"prod\", \"technology\": \"Python\"}], \"relations\": [[\"uses\", \"app_analytics_service\"], [\"reads_from\", \"app_analytics_service\"], [\"supports\", \"app_analytics_service\"]]}}",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "app_crm",
+            "type": "application",
+            "name": "CRM Core",
+            "domain": "Sales",
+            "owner": "team_sales_platform",
+            "environment": "prod",
+            "technology": "Java"
+          },
+          {
+            "id": "app_analytics_service",
+            "type": "application",
+            "name": "Analytics Service",
+            "domain": "Marketing",
+            "owner": "team_marketing_platform",
+            "environment": "prod",
+            "technology": "Python"
+          }
+        ],
+        "relations": [
+          [
+            "uses",
+            "app_analytics_service"
+          ],
+          [
+            "reads_from",
+            "app_analytics_service"
+          ],
+          [
+            "supports",
+            "app_analytics_service"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "name": "notifications_engagement",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['elements', 'relations']",
+      "Unexpected top-level keys: ['landscape_context', 'task']"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"service_notification_service\", \"type\": \"api\", \"name\": \"Notification Service API\", \"domain\": \"Operations\", \"owner\": \"team_operations_api\", \"environment\": \"prod\", \"technology\": \"REST\"}], \"relations\": []}, \"task\": \"Integrate the Notification Service API into CRM Core.\"}",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "service_notification_service",
+            "type": "api",
+            "name": "Notification Service API",
+            "domain": "Operations",
+            "owner": "team_operations_api",
+            "environment": "prod",
+            "technology": "REST"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Integrate the Notification Service API into CRM Core."
+    }
+  },
+  {
+    "name": "partner_orders_b2b",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['elements', 'relations']",
+      "Unexpected top-level keys: ['landscape_context', 'task']"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"api_new_api_gateway_1\", \"type\": \"api\", \"name\": \"New API Gateway\", \"domain\": \"Commerce\", \"owner\": \"team_order_platform\", \"environment\": \"prod\", \"technology\": \"Java\"}], \"relations\": []}, \"task\": \"Integrate the new API into existing systems.\"}",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "api_new_api_gateway_1",
+            "type": "api",
+            "name": "New API Gateway",
+            "domain": "Commerce",
+            "owner": "team_order_platform",
+            "environment": "prod",
+            "technology": "Java"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Integrate the new API into existing systems."
+    }
+  },
+  {
+    "name": "forecasting_manufacturing",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['elements', 'relations']",
+      "Unexpected top-level keys: ['landscape_context', 'task']"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"cap_forecasting\", \"type\": \"business_capability\", \"name\": \"Demand Forecasting\", \"owner\": \"team_supply_analytics\", \"environment\": \"prod\"}, {\"id\": \"app_inventory_service_2019\", \"type\": \"application\", \"name\": \"Inventory Service 2019\", \"domain\": \"Operations\", \"owner\": \"team_supply_platform\", \"environment\": \"prod\", \"technology\": \"Java\"}], \"relations\": []}, \"task\": \"Replace old inventory service with new one to support demand forecasting.\"}",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "cap_forecasting",
+            "type": "business_capability",
+            "name": "Demand Forecasting",
+            "owner": "team_supply_analytics",
+            "environment": "prod"
+          },
+          {
+            "id": "app_inventory_service_2019",
+            "type": "application",
+            "name": "Inventory Service 2019",
+            "domain": "Operations",
+            "owner": "team_supply_platform",
+            "environment": "prod",
+            "technology": "Java"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Replace old inventory service with new one to support demand forecasting."
+    }
+  }
+]

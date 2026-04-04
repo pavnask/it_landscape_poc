@@ -1,0 +1,308 @@
+[
+  {
+    "name": "real_analytics_platform",
+    "ok": true,
+    "errors": [],
+    "raw_output": "{\"elements\": [{\"id\": \"app_analytics_marketplace\", \"type\": \"application\", \"name\": \"Marketplace Analytics App\", \"domain\": \"Marketing & Sales\", \"owner\": \"marketing_team\", \"environment\": \"prod\", \"technology\": \"sber.softwares.python\"}], \"relations\": [{\"source\": \"app_analytics_marketplace\", \"type\": \"uses\", \"target\": \"app_berezka\"}, {\"source\": \"app_analytics_marketplace\", \"type\": \"supports\", \"target\": \"cap_analytics\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_analytics_marketplace",
+          "type": "application",
+          "name": "Marketplace Analytics App",
+          "domain": "Marketing & Sales",
+          "owner": "marketing_team",
+          "environment": "prod",
+          "technology": "sber.softwares.python"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_analytics_marketplace",
+          "type": "uses",
+          "target": "app_berezka"
+        },
+        {
+          "source": "app_analytics_marketplace",
+          "type": "supports",
+          "target": "cap_analytics"
+        }
+      ]
+    }
+  },
+  {
+    "name": "real_catalog_extension",
+    "ok": true,
+    "errors": [],
+    "raw_output": "{\"elements\": [{\"id\": \"app_new_app\", \"type\": \"application\", \"name\": \"New Application for Catalog Extension\", \"domain\": \"Продуктовая фабрика (основная деятельность)\", \"owner\": \"ecogroup.berezka.groups.systems_sbercloud\", \"environment\": \"prod\", \"technology\": \"Java\"}], \"relations\": [{\"source\": \"app_new_app\", \"type\": \"uses\", \"target\": \"app_catalog\"}, {\"source\": \"app_new_app\", \"type\": \"supports\", \"target\": \"cap_service_catalog\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_new_app",
+          "type": "application",
+          "name": "New Application for Catalog Extension",
+          "domain": "Продуктовая фабрика (основная деятельность)",
+          "owner": "ecogroup.berezka.groups.systems_sbercloud",
+          "environment": "prod",
+          "technology": "Java"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_new_app",
+          "type": "uses",
+          "target": "app_catalog"
+        },
+        {
+          "source": "app_new_app",
+          "type": "supports",
+          "target": "cap_service_catalog"
+        }
+      ]
+    }
+  },
+  {
+    "name": "real_deals_support",
+    "ok": false,
+    "errors": [
+      "Could not parse/validate output: unterminated string literal (detected at line 2) (<unknown>, line 2)"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"app_crm\", \"type\": \"application\", \"name\": \"CRM\", \"domain\": \"CRM-операционный\", \"owner\": \"ecogroup.berezka.groups_systems_sbercloud\", \"environment\": \"prod\", \"technology\": \"ecogroup.berezka.bitrix, sber.softwares.mysql\"}, {\"id\": \"app_new_app\", \"type\": \"application\", \"name\": \"New App\", \"domain\": \"CRM-операционный\", \"owner\": \"ecogroup.berezka.groups_systems_sbercloud\", \"environment\": \"prod\", \"technology\": \"ecogroup.berezka.bitrix, sber.softwares.python\"}], \"relations\": [{\"source\": \"app_new_app\", \"type\": \"supports\", \"target\": \"app_crm\"}, {\"source\": \"app_new_app\", \"type\": \"uses\", \"target\": \"api_integration_service\"}]}</code>\n{\"elements\":[{\"id\":\"app_new_app\",\"type\":\"application\",\"name\":\"New App",
+    "parsed_output": null
+  },
+  {
+    "name": "real_notifications_service",
+    "ok": false,
+    "errors": [
+      "Relation 2 type 'reads_from' is not allowed from application to application"
+    ],
+    "raw_output": "{\"elements\": [{\"id\": \"app_notification_service\", \"type\": \"application\", \"name\": \"Notification Service\", \"domain\": \"Customer Experience\", \"owner\": \"customer_experience_team\", \"environment\": \"prod\", \"technology\": \"Node.js\"}], \"relations\": [{\"source\": \"app_notification_service\", \"type\": \"supports\", \"target\": \"cap_send_sms\"}, {\"source\": \"app_notification_service\", \"type\": \"uses\", \"target\": \"app_smsc\"}, {\"source\": \"app_notification_service\", \"type\": \"reads_from\", \"target\": \"app_email\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_notification_service",
+          "type": "application",
+          "name": "Notification Service",
+          "domain": "Customer Experience",
+          "owner": "customer_experience_team",
+          "environment": "prod",
+          "technology": "Node.js"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_notification_service",
+          "type": "supports",
+          "target": "cap_send_sms"
+        },
+        {
+          "source": "app_notification_service",
+          "type": "uses",
+          "target": "app_smsc"
+        },
+        {
+          "source": "app_notification_service",
+          "type": "reads_from",
+          "target": "app_email"
+        }
+      ]
+    }
+  },
+  {
+    "name": "real_payment_api",
+    "ok": true,
+    "errors": [],
+    "raw_output": "{\"elements\": [{\"id\": \"api_payment_integration\", \"type\": \"api\", \"name\": \"Payment Integration\", \"domain\": \"Finance\", \"owner\": \"system_administrator\", \"environment\": \"prod\", \"technology\": \"Python\"}], \"relations\": [{\"source\": \"api_payment_integration\", \"type\": \"uses\", \"target\": \"app_berezka\"}, {\"source\": \"api_payment_integration\", \"type\": \"supports\", \"target\": \"cap_service_payments\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "api_payment_integration",
+          "type": "api",
+          "name": "Payment Integration",
+          "domain": "Finance",
+          "owner": "system_administrator",
+          "environment": "prod",
+          "technology": "Python"
+        }
+      ],
+      "relations": [
+        {
+          "source": "api_payment_integration",
+          "type": "uses",
+          "target": "app_berezka"
+        },
+        {
+          "source": "api_payment_integration",
+          "type": "supports",
+          "target": "cap_service_payments"
+        }
+      ]
+    }
+  },
+  {
+    "name": "real_auth_extension",
+    "ok": false,
+    "errors": [
+      "Relation 0 type 'supports' is not allowed from application to application",
+      "Relation 1 type 'uses' is not allowed from application to business_capability"
+    ],
+    "raw_output": "{\"elements\": [{\"id\": \"app_newauth\", \"type\": \"application\", \"name\": \"New Authentication Application\", \"domain\": \"Principles of Operations\", \"owner\": \"system_administrator\", \"environment\": \"prod\", \"technology\": \"sber.softwares.python\"}], \"relations\": [{\"source\": \"app_newauth\", \"type\": \"supports\", \"target\": \"app_berezka\"}, {\"source\": \"app_newauth\", \"type\": \"uses\", \"target\": \"cap_auth\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_newauth",
+          "type": "application",
+          "name": "New Authentication Application",
+          "domain": "Principles of Operations",
+          "owner": "system_administrator",
+          "environment": "prod",
+          "technology": "sber.softwares.python"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_newauth",
+          "type": "supports",
+          "target": "app_berezka"
+        },
+        {
+          "source": "app_newauth",
+          "type": "uses",
+          "target": "cap_auth"
+        }
+      ]
+    }
+  },
+  {
+    "name": "real_buh_support_app",
+    "ok": false,
+    "errors": [
+      "Missing top-level keys: ['elements', 'relations']",
+      "Unexpected top-level keys: ['landscape_context']"
+    ],
+    "raw_output": "{\"landscape_context\": {\"elements\": [{\"id\": \"app_2b\", \"type\": \"application\", \"name\": \"ERP_2B\", \"domain\": \"Бухгалтерия и финансы\", \"owner\": \"ecogroup.berezka.groups.systems_office\", \"environment\": \"prod\", \"technology\": \"Unknown\"}, {\"id\": \"app_3a\", \"type\": \"application\", \"name\": \"CRM_3A\", \"domain\": \"Бухгалтерия и финансы\", \"owner\": \"ecogroup.berezka.groups.systems_office\", \"environment\": \"prod\", \"technology\": \"Unknown\"}], \"relations\": [[\"uses\", \"app_1c\"], [\"supports\", \"app_1c\"]]}}",
+    "parsed_output": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "app_2b",
+            "type": "application",
+            "name": "ERP_2B",
+            "domain": "Бухгалтерия и финансы",
+            "owner": "ecogroup.berezka.groups.systems_office",
+            "environment": "prod",
+            "technology": "Unknown"
+          },
+          {
+            "id": "app_3a",
+            "type": "application",
+            "name": "CRM_3A",
+            "domain": "Бухгалтерия и финансы",
+            "owner": "ecogroup.berezka.groups.systems_office",
+            "environment": "prod",
+            "technology": "Unknown"
+          }
+        ],
+        "relations": [
+          [
+            "uses",
+            "app_1c"
+          ],
+          [
+            "supports",
+            "app_1c"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "name": "real_geo_enrichment",
+    "ok": false,
+    "errors": [
+      "Relation 2 type 'reads_from' is not allowed from application to application"
+    ],
+    "raw_output": "{\"elements\": [{\"id\": \"app_geoinfo\", \"type\": \"application\", \"name\": \"Geoinformation Service\", \"domain\": \"Geographic Information Systems\", \"owner\": \"ecogroup.berezka.groups.systems_sbercloud\", \"environment\": \"prod\", \"technology\": \"sber.softwares.python\"}], \"relations\": [{\"source\": \"app_geoinfo\", \"type\": \"uses\", \"target\": \"app_berezka\"}, {\"source\": \"app_geoinfo\", \"type\": \"supports\", \"target\": \"cap_service_catalog\"}, {\"source\": \"app_geoinfo\", \"type\": \"reads_from\", \"target\": \"app_2gis\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_geoinfo",
+          "type": "application",
+          "name": "Geoinformation Service",
+          "domain": "Geographic Information Systems",
+          "owner": "ecogroup.berezka.groups.systems_sbercloud",
+          "environment": "prod",
+          "technology": "sber.softwares.python"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_geoinfo",
+          "type": "uses",
+          "target": "app_berezka"
+        },
+        {
+          "source": "app_geoinfo",
+          "type": "supports",
+          "target": "cap_service_catalog"
+        },
+        {
+          "source": "app_geoinfo",
+          "type": "reads_from",
+          "target": "app_2gis"
+        }
+      ]
+    }
+  },
+  {
+    "name": "real_analytics_ingestion_api",
+    "ok": false,
+    "errors": [
+      "Could not parse/validate output: unterminated string literal (detected at line 1) (<unknown>, line 1)"
+    ],
+    "raw_output": "{\"elements\":[{\"id\":\"api_new_api\",\"type\":\"api\",\"name\":\"New API\",\"domain\":\"\",\"owner\":\"\",\"environment\":\"\",\"technology\":\"\"},{\"id\":\"db_marketplace\",\"type\":\"database\",\"name\":\"Marketplace DB\",\"domain\":\"\",\"owner\":\"\",\"environment\":\"\",\"technology\":\"sber.softwares.mysql\"},{\"id\":\"db_analytics\",\"type\":\"database\",\"name\":\"Analytics DB\",\"domain\":\"\",\"owner\":\"\",\"environment\":\"\",\"technology\":\"sber.softwares.mysql\"}],\"relations\":[{\"source_id\":\"api_new_api\",\"source_type\":\"api\",\"source_operation\":\"create\",\"target_id\":\"db_marketplace\",\"target_type\":\"database\",\"relation_type\":\"reads_from\"},{\"source_id\":\"api_new_api\",\"source_type\":\"api\",\"source_operation\":\"read\",\"target_id\":\"db_marketplace\",\"target_type\":\"database\",\"relation_type\":\"uses\"},{\"source_id\":\"api_new_api\",\"source_type\":\"api\",\"source_operation\":\"update\",\"target_id\":\"db_marketplace\",\"target_type\":\"database\",\"relation_type\":\"writes_to\"},{\"source_id\":\"api_new_api\",\"source_type\":\"api\",\"source_operation\":\"delete\",\"target_id\":\"db_marketplace\",\"target_type\":\"",
+    "parsed_output": null
+  },
+  {
+    "name": "real_external_data_helper",
+    "ok": false,
+    "errors": [
+      "Relation 1 type 'supports' is not allowed from application to api"
+    ],
+    "raw_output": "{\"elements\":[{\"id\":\"app_exchange_service\",\"type\":\"application\",\"name\":\"Exchange Service\",\"domain\":\"Finance\",\"owner\":\"finance_team\",\"environment\":\"prod\",\"technology\":\"unknown\"},{\"id\":\"api_exchange_service\",\"type\":\"api\",\"name\":\"API for Exchange Service\",\"domain\":\"Finance\",\"owner\":\"finance_team\",\"environment\":\"prod\",\"technology\":\"python\"}],\"relations\":[{\"source\":\"app_exchange_service\",\"type\":\"uses\",\"target\":\"api_exchange_service\"},{\"source\":\"app_exchange_service\",\"type\":\"supports\",\"target\":\"api_exchange_service\"}]}",
+    "parsed_output": {
+      "elements": [
+        {
+          "id": "app_exchange_service",
+          "type": "application",
+          "name": "Exchange Service",
+          "domain": "Finance",
+          "owner": "finance_team",
+          "environment": "prod",
+          "technology": "unknown"
+        },
+        {
+          "id": "api_exchange_service",
+          "type": "api",
+          "name": "API for Exchange Service",
+          "domain": "Finance",
+          "owner": "finance_team",
+          "environment": "prod",
+          "technology": "python"
+        }
+      ],
+      "relations": [
+        {
+          "source": "app_exchange_service",
+          "type": "uses",
+          "target": "api_exchange_service"
+        },
+        {
+          "source": "app_exchange_service",
+          "type": "supports",
+          "target": "api_exchange_service"
+        }
+      ]
+    }
+  }
+]
