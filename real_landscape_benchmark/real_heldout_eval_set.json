@@ -1,0 +1,394 @@
+[
+  {
+    "name": "real_analytics_platform",
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "app_berezka",
+            "type": "application",
+            "name": "Маркетплейс",
+            "domain": "Продуктовая фабрика (основная деятельность)",
+            "owner": "ecogroup.berezka.groups.systems_sbercloud",
+            "environment": "prod",
+            "technology": "sber.softwares.mysql"
+          },
+          {
+            "id": "cap_analytics",
+            "type": "business_capability",
+            "name": "Построение аналитических срезов",
+            "owner": "function_owner",
+            "environment": "prod"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add an analytics application for the marketplace that uses marketplace data and supports analytics."
+    }
+  },
+  {
+    "name": "real_catalog_extension",
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "app_catalog",
+            "type": "application",
+            "name": "Каталог услуг",
+            "domain": "Продуктовая фабрика (основная деятельность)",
+            "owner": "ecogroup.berezka.groups.systems_sbercloud",
+            "environment": "prod",
+            "technology": "Unknown"
+          },
+          {
+            "id": "cap_service_catalog",
+            "type": "business_capability",
+            "name": "Ведение каталога услуг",
+            "owner": "function_owner",
+            "environment": "prod"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add a new application to extend the service catalog and connect it to the existing landscape."
+    }
+  },
+  {
+    "name": "real_deals_support",
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "app_crm",
+            "type": "application",
+            "name": "CRM",
+            "domain": "CRM-операционный",
+            "owner": "ecogroup.berezka.groups.systems_sbercloud",
+            "environment": "prod",
+            "technology": "ecogroup.berezka.bitrix, sber.softwares.mysql"
+          },
+          {
+            "id": "cap_deals",
+            "type": "business_capability",
+            "name": "Проведение сделок",
+            "owner": "function_owner",
+            "environment": "prod"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add a new application that supports deals processing and integrates with CRM."
+    }
+  },
+  {
+    "name": "real_notifications_service",
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "cap_send_sms",
+            "type": "business_capability",
+            "name": "Отправка СМС",
+            "owner": "function_owner",
+            "environment": "prod"
+          },
+          {
+            "id": "app_smsc",
+            "type": "application",
+            "name": "SMSC",
+            "domain": "Средства коммуникации",
+            "owner": "ecogroup.berezka.groups.external_partners",
+            "environment": "prod",
+            "technology": "Unknown"
+          },
+          {
+            "id": "app_email",
+            "type": "application",
+            "name": "Email",
+            "domain": "Средства коммуникации",
+            "owner": "ecogroup.berezka.groups.external_cloud",
+            "environment": "prod",
+            "technology": "Unknown"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add an internal notification application that supports customer messaging and can use existing communication channels."
+    }
+  },
+  {
+    "name": "real_payment_api",
+    "expected_new_type": "api",
+    "required_relation_types": [
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "app_berezka",
+            "type": "application",
+            "name": "Маркетплейс",
+            "domain": "Продуктовая фабрика (основная деятельность)",
+            "owner": "ecogroup.berezka.groups.systems_sbercloud",
+            "environment": "prod",
+            "technology": "sber.softwares.mysql"
+          },
+          {
+            "id": "cap_service_payments",
+            "type": "business_capability",
+            "name": "Оплата услуг",
+            "owner": "function_owner",
+            "environment": "prod"
+          },
+          {
+            "id": "app_1c",
+            "type": "application",
+            "name": "1C_Бухгалтерия",
+            "domain": "Бухгалтерия и финансы",
+            "owner": "ecogroup.berezka.groups.systems_office",
+            "environment": "prod",
+            "technology": "Unknown"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add a payment API or payment integration component for the marketplace and connect it to payments."
+    }
+  },
+  {
+    "name": "real_auth_extension",
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "app_berezka",
+            "type": "application",
+            "name": "Маркетплейс",
+            "domain": "Продуктовая фабрика (основная деятельность)",
+            "owner": "ecogroup.berezka.groups.systems_sbercloud",
+            "environment": "prod",
+            "technology": "sber.softwares.mysql"
+          },
+          {
+            "id": "cap_auth",
+            "type": "business_capability",
+            "name": "Аутентификация пользователей",
+            "owner": "function_owner",
+            "environment": "prod"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add a new authentication-related application that supports user authentication and integrates with the marketplace."
+    }
+  },
+  {
+    "name": "real_buh_support_app",
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "app_1c",
+            "type": "application",
+            "name": "1C_Бухгалтерия",
+            "domain": "Бухгалтерия и финансы",
+            "owner": "ecogroup.berezka.groups.systems_office",
+            "environment": "prod",
+            "technology": "Unknown"
+          },
+          {
+            "id": "cap_buh",
+            "type": "business_capability",
+            "name": "Бухучет",
+            "owner": "function_owner",
+            "environment": "prod"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add a supporting application for accounting processes that integrates with 1C and supports accounting."
+    }
+  },
+  {
+    "name": "real_geo_enrichment",
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "app_berezka",
+            "type": "application",
+            "name": "Маркетплейс",
+            "domain": "Продуктовая фабрика (основная деятельность)",
+            "owner": "ecogroup.berezka.groups.systems_sbercloud",
+            "environment": "prod",
+            "technology": "sber.softwares.mysql"
+          },
+          {
+            "id": "app_2gis",
+            "type": "application",
+            "name": "2GIS",
+            "domain": "Гео-информационные системы",
+            "owner": "ecogroup.berezka.groups.ecosystem_partners",
+            "environment": "prod",
+            "technology": "Unknown"
+          },
+          {
+            "id": "cap_service_catalog",
+            "type": "business_capability",
+            "name": "Ведение каталога услуг",
+            "owner": "function_owner",
+            "environment": "prod"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add an internal application that enriches marketplace services with geo information and supports the service catalog."
+    }
+  },
+  {
+    "name": "real_analytics_ingestion_api",
+    "expected_new_type": "api",
+    "required_relation_types": [
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "app_berezka",
+            "type": "application",
+            "name": "Маркетплейс",
+            "domain": "Продуктовая фабрика (основная деятельность)",
+            "owner": "ecogroup.berezka.groups.systems_sbercloud",
+            "environment": "prod",
+            "technology": "sber.softwares.mysql"
+          },
+          {
+            "id": "app_analytics",
+            "type": "application",
+            "name": "Аналитика",
+            "domain": "Аналитика данных",
+            "owner": "ecogroup.berezka.groups.system",
+            "environment": "prod",
+            "technology": "Unknown"
+          },
+          {
+            "id": "cap_analytics",
+            "type": "business_capability",
+            "name": "Построение аналитических срезов",
+            "owner": "function_owner",
+            "environment": "prod"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add an API for analytics ingestion that connects marketplace data to analytics and supports analytics."
+    }
+  },
+  {
+    "name": "real_external_data_helper",
+    "expected_new_type": "application",
+    "required_relation_types": [
+      "uses",
+      "supports"
+    ],
+    "forbidden_new_types": [
+      "business_capability"
+    ],
+    "payload": {
+      "landscape_context": {
+        "elements": [
+          {
+            "id": "app_external_data",
+            "type": "application",
+            "name": "Учетная система",
+            "domain": "CRM-операционный",
+            "owner": "ecogroup.berezka.groups.external_partners",
+            "environment": "prod",
+            "technology": "Unknown"
+          },
+          {
+            "id": "app_crm",
+            "type": "application",
+            "name": "CRM",
+            "domain": "CRM-операционный",
+            "owner": "ecogroup.berezka.groups.systems_sbercloud",
+            "environment": "prod",
+            "technology": "ecogroup.berezka.bitrix, sber.softwares.mysql"
+          },
+          {
+            "id": "cap_deals",
+            "type": "business_capability",
+            "name": "Проведение сделок",
+            "owner": "function_owner",
+            "environment": "prod"
+          }
+        ],
+        "relations": []
+      },
+      "task": "Add an application that helps exchange deal-related data between CRM and the external accounting system."
+    }
+  }
+]

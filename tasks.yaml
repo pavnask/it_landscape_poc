@@ -1,0 +1,10 @@
+kadzo.v2023.tasks:
+  ecogroup.berezka.tasks.executor_app:
+    task: Создание мобильного приложения Исполнителя услуги
+    planned: Q4 2024
+    status: Запланировано
+
+  ecogroup.berezka.tasks.analytics:
+    task: Разработка/приобретение системы аналитики
+    planned: Q2 2025
+    status: Запланировано

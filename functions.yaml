@@ -1,0 +1,71 @@
+kadzo.v2023.functions:
+  ecogroup.berezka.functions.service_catalog:
+    title: Ведение каталога услуг
+    description: Набор услуг, представленный на маркетплейсе
+    systems:
+      - ecogroup.berezka.systems.analytics
+      - ecogroup.berezka.systems.berezka.catalog
+    status: Разрабатывается или модифицируется
+    target: Целевое
+
+  ecogroup.berezka.functions.auth:
+    title: Аутентификация пользователей
+    description: Аутентификация и авторизация пользователей, в том числе через сторонних провайдеров
+    systems:
+      - ecogroup.berezka.systems.berezka
+      - ecogroup.berezka.external_systems.esia
+    status: Удаляется
+    target: Целевое
+
+  ecogroup.berezka.functions.service_payments:
+    title: Оплата услуг
+    description: Проведение платежей за оказанные услуги
+    systems:
+      - ecogroup.berezka.systems.berezka
+      - ecogroup.berezka.external_systems.smev
+    status: Используется
+    target: Целевое
+
+  ecogroup.berezka.functions.deals:
+    title: Проведение сделок
+    description: Информация о выполненных услугах и история оплат
+    systems:
+      - ecogroup.berezka.systems.crm
+      - ecogroup.berezka.systems.fias
+      - ecogroup.berezka.systems.fias_gate
+      - ecogroup.berezka.systems.external_data
+    status: Используется
+    target: Целевое
+
+  ecogroup.berezka.functions.buh:
+    title: Бухучет
+    description: Бухгалтерская отчетность
+    systems:
+      - ecogroup.berezka.systems.1c
+      - ecogroup.berezka.external_systems.marketing
+      - ecogroup.berezka.external_systems.office365
+      - ecogroup.berezka.systems.osinka
+      - ecogroup.berezka.systems.sosinka
+      - ecogroup.berezka.systems.dubok
+    status: Используется
+    target: Целевое
+
+  ecogroup.berezka.functions.analytics:
+    title: Построение аналитических срезов
+    description: Построение гистограмм по стоимости услуг в разрезах регионов/категорий
+    systems:
+      - ecogroup.berezka.systems.analytics
+    status: Планируется
+    target: Целевое
+
+  ecogroup.berezka.functions.send_sms:
+    title: Отправка СМС
+    description: Рассылка СМС-сообщений клиентам
+    systems:
+      - ecogroup.berezka.ecosystem.partners.2gis
+      - ecogroup.berezka.external_systems.email
+      - ecogroup.berezka.external_systems.telegram
+      - ecogroup.berezka.external_systems.iptelephony
+      - ecogroup.berezka.external_systems.smsc
+    status: Используется
+    target: Целевое

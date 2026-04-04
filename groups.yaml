@@ -1,0 +1,26 @@
+kadzo.v2023.groups:
+  ecogroup.berezka.groups.system:
+    title: Системы Маркетплейс
+
+  ecogroup.berezka.groups.systems_sbercloud:
+    title: Системы Маркетплейс в SberCloud
+    parent: ecogroup.berezka.groups.system
+
+  ecogroup.berezka.groups.systems_office:
+    title: Системы Маркетплейс в офисе
+    parent: ecogroup.berezka.groups.system
+
+  ecogroup.berezka.groups.ecosystem_partners:
+    title: Компании Экосистемы
+
+  ecosystem.groups.unified_elements:
+    title: Объединяющие элементы Экосистемы
+
+  ecogroup.berezka.groups.external_partners:
+    title: Внешние партнеры и сервисы
+
+  ecogroup.berezka.groups.gov:
+    title: Государство
+
+  ecogroup.berezka.groups.external_cloud:
+    title: Внешнее облако

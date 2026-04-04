@@ -1,0 +1,285 @@
+kadzo.v2023.systems:
+  ecogroup.berezka.systems.berezka:
+    title: Маркетплейс
+    description: Система на микросервисной архитектуре, реализующая прикладной функционал маркетплейса
+    class: Продуктовая фабрика (основная деятельность)
+    group: ecogroup.berezka.groups.systems_sbercloud
+    location: Внутренняя
+    ownership: Владеем исходным кодом
+    target-status: Целевая
+    live-stage: Промышленная эксплуатация
+    change-type: Модифицируется
+    criticality: Business Critical
+    performance: Обработка не менее 150 запросов в секунду со средним временем отклика 1 секунда и максимальным временем отклика 15 секунд
+    rto: 24
+    rpo: 24
+    sla: 95
+    monitoring: Prometheus
+    high_availability:
+      type: Да
+      capacity_reservation_type: Active
+      capacity_management: Полное
+    backup:
+      backup_placement: Резервный ЦОД
+      placement: ЦОД
+    disaster_recovery:
+      type: Да
+      capacity_reservation_type: StandBy
+      capacity_management: Полное
+    scalability: Вертикальная
+    softwares:
+      - sber.softwares.mysql
+
+  ecogroup.berezka.systems.berezka.catalog:
+    title: Каталог услуг
+    description: Каталог услуг, предоставляемых на маркетплейса
+    class: Продуктовая фабрика (основная деятельность)
+    group: ecogroup.berezka.groups.systems_sbercloud
+    parent: ecogroup.berezka.systems.berezka
+    location: Внутренняя
+    ownership: Владеем исходным кодом
+    target-status: Целевая
+    live-stage: Промышленная эксплуатация
+    change-type: Модифицируется
+    criticality: Business Critical
+    performance: Обработка не менее 150 запросов в секунду со средним временем отклика 1 секунда и максимальным временем отклика 15 секунд
+    rto: 24
+    rpo: 24
+    sla: 95
+    monitoring: Prometheus
+    high_availability:
+      type: Да
+      capacity_reservation_type: Active
+      capacity_management: Полное
+    disaster_recovery:
+      type: Да
+      capacity_reservation_type: StandBy
+      capacity_management: Полное
+    scalability: Вертикальная и горизонтальная
+    backup:
+      placement: ЦОД
+      backup_placement: Резервный ЦОД
+
+  ecogroup.berezka.systems.crm:
+    title: CRM
+    description: Операционный CRM
+    class: CRM-операционный
+    location: Внутренняя
+    ownership: Владеем экземпляром
+    group: ecogroup.berezka.groups.systems_sbercloud
+    target-status: Целевая
+    live-stage: Опытная эксплуатация
+    change-type: Используется
+    criticality: Business Operational
+    sla: 95
+    monitoring: Prometheus
+    softwares:
+      - ecogroup.berezka.bitrix
+      - sber.softwares.mysql
+
+  ecogroup.berezka.systems.1c:
+    title: 1C_Бухгалтерия
+    description: Бухгалтерская отчетность
+    class: Бухгалтерия и финансы
+    group: ecogroup.berezka.groups.systems_office
+    location: Внутренняя
+    ownership: Владеем экземпляром
+    live-stage: Промышленная эксплуатация
+    target-status: Целевая
+    criticality: Office Productivity
+    change-type: Используется
+    sla: 95
+
+  ecogroup.berezka.systems.analytics:
+    title: Аналитика
+    description: Построение срезов по потребляемым услугам, построение гистрограмм стоимости услуг
+    class: Аналитика данных
+    live-stage: Эскиз
+    target-status: Целевая
+    group: ecogroup.berezka.groups.system
+
+  ecogroup.berezka.ecosystem.partners.2gis:
+    title: 2GIS
+    description: Карты в приложениях
+    class: Гео-информационные системы
+    location: Внешняя
+    target-status: Не целевая
+    ownership: Система партнера
+    live-stage: Промышленная эксплуатация
+    change-type: Используется
+    group: ecogroup.berezka.groups.ecosystem_partners
+
+  ecogroup.berezka.external_systems.marketing:
+    title: Маркетинговые рассылки
+    description: Рассылка маркетинговых сообщений клиентам
+    class: Маркетинг
+    target-status: Не целевая
+    location: Внешняя
+    ownership: Система партнера
+    live-stage: Промышленная эксплуатация
+    change-type: Используется
+    group: ecogroup.berezka.groups.external_partners
+
+  ecogroup.berezka.external_systems.smsc:
+    title: SMSC
+    description: Сервис отправки SMS клиентам
+    class: Средства коммуникации
+    location: Внешняя
+    target-status: Не целевая
+    ownership: Система партнера
+    live-stage: Промышленная эксплуатация
+    change-type: Используется
+    group: ecogroup.berezka.groups.external_partners
+
+  ecogroup.berezka.external_systems.email:
+    title: Email
+    description: Корпоративная почта
+    class: Средства коммуникации
+    location: Внешняя
+    target-status: Не целевая
+    ownership: SaaS
+    live-stage: Промышленная эксплуатация
+    change-type: Используется
+    group: ecogroup.berezka.groups.external_cloud
+
+  ecogroup.berezka.external_systems.iptelephony:
+    title: АТС
+    description: Внешний сервис виртуальной АТС
+    class: Средства коммуникации
+    location: Внешняя
+    target-status: Не целевая
+    ownership: SaaS
+    live-stage: Промышленная эксплуатация
+    change-type: Используется
+    group: ecogroup.berezka.groups.external_cloud
+
+  ecogroup.berezka.external_systems.office365:
+    title: Офис365
+    description: Облачный офисный пакет
+    class: Совместная работа (collaboration)
+    location: Внешняя
+    target-status: Не целевая
+    ownership: SaaS
+    live-stage: Промышленная эксплуатация
+    change-type: Используется
+    group: ecogroup.berezka.groups.external_cloud
+
+  ecogroup.berezka.external_systems.telegram:
+    title: Telegram
+    description: Telegram
+    class: Средства коммуникации
+    location: Внешняя
+    target-status: Не целевая
+    ownership: Система партнера
+    live-stage: Промышленная эксплуатация
+    change-type: Используется
+    group: ecogroup.berezka.groups.external_partners
+
+  ecogroup.berezka.external_systems.esia:
+    title: Госуслуги
+    description: Госуслуги
+    class: Клиентский профиль (Customer Information File)
+    location: Внешняя
+    target-status: Не целевая
+    ownership: Система партнера
+    live-stage: Промышленная эксплуатация
+    change-type: Используется
+    group: ecogroup.berezka.groups.gov
+
+  ecogroup.berezka.external_systems.smev:
+    title: СМЭВ
+    description: Взаимодействие с Электронным правительством
+    class: Регуляторная отчетность
+    location: Внешняя
+    target-status: Не целевая
+    change-type: Используется
+    ownership: Система партнера
+    live-stage: Промышленная эксплуатация
+    group: ecogroup.berezka.groups.gov
+
+  ecogroup.berezka.systems.osinka:
+    title: Базар услуг
+    description: Монолитная система, реализующая прикладной функционал маркетплейса
+    class: Продуктовая фабрика (основная деятельность)
+    group: ecogroup.berezka.groups.systems_sbercloud
+    location: Внутренняя
+    ownership: Владеем исходным кодом
+    target-status: Не целевая
+    change-type: Модифицируется
+    live-stage: Промышленная эксплуатация
+    criticality: Business Critical
+    performance: Обработка не менее 150 запросов в секунду со средним временем отклика 1 секунда и максимальным временем отклика 15 секунд
+    rto: 24
+    rpo: 24
+    sla: 95
+    monitoring: Нет
+    softwares:
+      - ecogroup.berezka.bitrix
+
+  ecogroup.berezka.systems.sosinka:
+    title: Сосинка услуг
+    description: Монолитная система, реализующая прикладной функционал маркетплейса
+    class: Продуктовая фабрика (основная деятельность)
+    group: ecogroup.berezka.groups.systems_sbercloud
+    location: Внутренняя
+    ownership: Владеем исходным кодом
+    live-stage: В разработке / приобретение
+    target-status: Не целевая
+    change-type: Разрабатывается
+    criticality: Business Critical
+    performance: Обработка не менее 150 запросов в секунду со средним временем отклика 1 секунда и максимальным временем отклика 15 секунд
+    rto: 24
+    rpo: 24
+    sla: 95
+    monitoring: Нет
+
+  ecogroup.berezka.systems.dubok:
+    title: Дубок услуг
+    description: Монолитная система, реализующая прикладной функционал маркетплейса
+    parent: ecogroup.berezka.systems.sosinka
+    class: Продуктовая фабрика (основная деятельность)
+    group: ecogroup.berezka.groups.systems_sbercloud
+    location: Внутренняя
+    ownership: Владеем исходным кодом
+    live-stage: В разработке / приобретение
+    target-status: Не целевая
+    change-type: Разрабатывается
+    criticality: Business Critical
+    performance: Обработка не менее 150 запросов в секунду со средним временем отклика 1 секунда и максимальным временем отклика 15 секунд
+    rto: 24
+    rpo: 24
+    sla: 95
+    monitoring: Нет
+
+  ecogroup.berezka.systems.fias:
+    title: ФИАС
+    description: Федеральная информационная адресная система
+    class: MDM (Master Data Management)
+    group: ecogroup.berezka.groups.gov
+    location: Внешняя
+    ownership: Система партнера
+    live-stage: Промышленная эксплуатация
+    target-status: Целевая
+    change-type: Используется
+
+  ecogroup.berezka.systems.fias_gate:
+    title: Шлюз ФИАС
+    description: Шлюз ФИАС
+    class: Шлюзы, Балансировщики, Proxy
+    group: ecogroup.berezka.groups.gov
+    location: Внешняя
+    ownership: Система партнера
+    live-stage: Промышленная эксплуатация
+    target-status: Целевая
+    change-type: Используется
+
+  ecogroup.berezka.systems.external_data:
+    title: Учетная система
+    description: Внешняя учетная система ведения сделок
+    class: CRM-операционный
+    location: Внешняя
+    group: ecogroup.berezka.groups.external_partners
+    ownership: Система партнера
+    live-stage: Промышленная эксплуатация
+    target-status: Целевая
+    change-type: Используется

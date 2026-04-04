@@ -1,0 +1,375 @@
+{
+  "elements": [
+    {
+      "id": "app_berezka",
+      "type": "application",
+      "name": "Маркетплейс",
+      "domain": "Продуктовая фабрика (основная деятельность)",
+      "owner": "ecogroup.berezka.groups.systems_sbercloud",
+      "environment": "prod",
+      "technology": "sber.softwares.mysql"
+    },
+    {
+      "id": "app_catalog",
+      "type": "application",
+      "name": "Каталог услуг",
+      "domain": "Продуктовая фабрика (основная деятельность)",
+      "owner": "ecogroup.berezka.groups.systems_sbercloud",
+      "environment": "prod",
+      "technology": "Unknown"
+    },
+    {
+      "id": "app_crm",
+      "type": "application",
+      "name": "CRM",
+      "domain": "CRM-операционный",
+      "owner": "ecogroup.berezka.groups.systems_sbercloud",
+      "environment": "prod",
+      "technology": "ecogroup.berezka.bitrix, sber.softwares.mysql"
+    },
+    {
+      "id": "app_1c",
+      "type": "application",
+      "name": "1C_Бухгалтерия",
+      "domain": "Бухгалтерия и финансы",
+      "owner": "ecogroup.berezka.groups.systems_office",
+      "environment": "prod",
+      "technology": "Unknown"
+    },
+    {
+      "id": "app_analytics",
+      "type": "application",
+      "name": "Аналитика",
+      "domain": "Аналитика данных",
+      "owner": "ecogroup.berezka.groups.system",
+      "environment": "prod",
+      "technology": "Unknown"
+    },
+    {
+      "id": "app_2gis",
+      "type": "application",
+      "name": "2GIS",
+      "domain": "Гео-информационные системы",
+      "owner": "ecogroup.berezka.groups.ecosystem_partners",
+      "environment": "prod",
+      "technology": "Unknown"
+    },
+    {
+      "id": "app_marketing",
+      "type": "application",
+      "name": "Маркетинговые рассылки",
+      "domain": "Маркетинг",
+      "owner": "ecogroup.berezka.groups.external_partners",
+      "environment": "prod",
+      "technology": "Unknown"
+    },
+    {
+      "id": "app_smsc",
+      "type": "application",
+      "name": "SMSC",
+      "domain": "Средства коммуникации",
+      "owner": "ecogroup.berezka.groups.external_partners",
+      "environment": "prod",
+      "technology": "Unknown"
+    },
+    {
+      "id": "app_email",
+      "type": "application",
+      "name": "Email",
+      "domain": "Средства коммуникации",
+      "owner": "ecogroup.berezka.groups.external_cloud",
+      "environment": "prod",
+      "technology": "Unknown"
+    },
+    {
+      "id": "app_iptelephony",
+      "type": "application",
+      "name": "АТС",
+      "domain": "Средства коммуникации",
+      "owner": "ecogroup.berezka.groups.external_cloud",
+      "environment": "prod",
+      "technology": "Unknown"
+    },
+    {
+      "id": "app_office365",
+      "type": "application",
+      "name": "Офис365",
+      "domain": "Совместная работа (collaboration)",
+      "owner": "ecogroup.berezka.groups.external_cloud",
+      "environment": "prod",
+      "technology": "Unknown"
+    },
+    {
+      "id": "app_telegram",
+      "type": "application",
+      "name": "Telegram",
+      "domain": "Средства коммуникации",
+      "owner": "ecogroup.berezka.groups.external_partners",
+      "environment": "prod",
+      "technology": "Unknown"
+    },
+    {
+      "id": "app_esia",
+      "type": "application",
+      "name": "Госуслуги",
+      "domain": "Клиентский профиль (Customer Information File)",
+      "owner": "ecogroup.berezka.groups.gov",
+      "environment": "prod",
+      "technology": "Unknown"
+    },
+    {
+      "id": "app_smev",
+      "type": "application",
+      "name": "СМЭВ",
+      "domain": "Регуляторная отчетность",
+      "owner": "ecogroup.berezka.groups.gov",
+      "environment": "prod",
+      "technology": "Unknown"
+    },
+    {
+      "id": "app_osinka",
+      "type": "application",
+      "name": "Базар услуг",
+      "domain": "Продуктовая фабрика (основная деятельность)",
+      "owner": "ecogroup.berezka.groups.systems_sbercloud",
+      "environment": "prod",
+      "technology": "ecogroup.berezka.bitrix"
+    },
+    {
+      "id": "app_sosinka",
+      "type": "application",
+      "name": "Сосинка услуг",
+      "domain": "Продуктовая фабрика (основная деятельность)",
+      "owner": "ecogroup.berezka.groups.systems_sbercloud",
+      "environment": "prod",
+      "technology": "Unknown"
+    },
+    {
+      "id": "app_dubok",
+      "type": "application",
+      "name": "Дубок услуг",
+      "domain": "Продуктовая фабрика (основная деятельность)",
+      "owner": "ecogroup.berezka.groups.systems_sbercloud",
+      "environment": "prod",
+      "technology": "Unknown"
+    },
+    {
+      "id": "app_fias",
+      "type": "application",
+      "name": "ФИАС",
+      "domain": "MDM (Master Data Management)",
+      "owner": "ecogroup.berezka.groups.gov",
+      "environment": "prod",
+      "technology": "Unknown"
+    },
+    {
+      "id": "app_fias_gate",
+      "type": "application",
+      "name": "Шлюз ФИАС",
+      "domain": "Шлюзы, Балансировщики, Proxy",
+      "owner": "ecogroup.berezka.groups.gov",
+      "environment": "prod",
+      "technology": "Unknown"
+    },
+    {
+      "id": "app_external_data",
+      "type": "application",
+      "name": "Учетная система",
+      "domain": "CRM-операционный",
+      "owner": "ecogroup.berezka.groups.external_partners",
+      "environment": "prod",
+      "technology": "Unknown"
+    },
+    {
+      "id": "cap_service_catalog",
+      "type": "business_capability",
+      "name": "Ведение каталога услуг",
+      "owner": "function_owner",
+      "environment": "prod"
+    },
+    {
+      "id": "cap_auth",
+      "type": "business_capability",
+      "name": "Аутентификация пользователей",
+      "owner": "function_owner",
+      "environment": "prod"
+    },
+    {
+      "id": "cap_service_payments",
+      "type": "business_capability",
+      "name": "Оплата услуг",
+      "owner": "function_owner",
+      "environment": "prod"
+    },
+    {
+      "id": "cap_deals",
+      "type": "business_capability",
+      "name": "Проведение сделок",
+      "owner": "function_owner",
+      "environment": "prod"
+    },
+    {
+      "id": "cap_buh",
+      "type": "business_capability",
+      "name": "Бухучет",
+      "owner": "function_owner",
+      "environment": "prod"
+    },
+    {
+      "id": "cap_analytics",
+      "type": "business_capability",
+      "name": "Построение аналитических срезов",
+      "owner": "function_owner",
+      "environment": "prod"
+    },
+    {
+      "id": "cap_send_sms",
+      "type": "business_capability",
+      "name": "Отправка СМС",
+      "owner": "function_owner",
+      "environment": "prod"
+    }
+  ],
+  "relations": [
+    {
+      "source": "app_analytics",
+      "type": "uses",
+      "target": "app_berezka"
+    },
+    {
+      "source": "app_1c",
+      "type": "uses",
+      "target": "app_berezka"
+    },
+    {
+      "source": "app_berezka",
+      "type": "uses",
+      "target": "app_catalog"
+    },
+    {
+      "source": "app_berezka",
+      "type": "uses",
+      "target": "app_2gis"
+    },
+    {
+      "source": "app_crm",
+      "type": "uses",
+      "target": "app_catalog"
+    },
+    {
+      "source": "app_1c",
+      "type": "uses",
+      "target": "app_fias"
+    },
+    {
+      "source": "app_analytics",
+      "type": "supports",
+      "target": "cap_service_catalog"
+    },
+    {
+      "source": "app_catalog",
+      "type": "supports",
+      "target": "cap_service_catalog"
+    },
+    {
+      "source": "app_berezka",
+      "type": "supports",
+      "target": "cap_auth"
+    },
+    {
+      "source": "app_esia",
+      "type": "supports",
+      "target": "cap_auth"
+    },
+    {
+      "source": "app_berezka",
+      "type": "supports",
+      "target": "cap_service_payments"
+    },
+    {
+      "source": "app_smev",
+      "type": "supports",
+      "target": "cap_service_payments"
+    },
+    {
+      "source": "app_crm",
+      "type": "supports",
+      "target": "cap_deals"
+    },
+    {
+      "source": "app_fias",
+      "type": "supports",
+      "target": "cap_deals"
+    },
+    {
+      "source": "app_fias_gate",
+      "type": "supports",
+      "target": "cap_deals"
+    },
+    {
+      "source": "app_external_data",
+      "type": "supports",
+      "target": "cap_deals"
+    },
+    {
+      "source": "app_1c",
+      "type": "supports",
+      "target": "cap_buh"
+    },
+    {
+      "source": "app_marketing",
+      "type": "supports",
+      "target": "cap_buh"
+    },
+    {
+      "source": "app_office365",
+      "type": "supports",
+      "target": "cap_buh"
+    },
+    {
+      "source": "app_osinka",
+      "type": "supports",
+      "target": "cap_buh"
+    },
+    {
+      "source": "app_sosinka",
+      "type": "supports",
+      "target": "cap_buh"
+    },
+    {
+      "source": "app_dubok",
+      "type": "supports",
+      "target": "cap_buh"
+    },
+    {
+      "source": "app_analytics",
+      "type": "supports",
+      "target": "cap_analytics"
+    },
+    {
+      "source": "app_2gis",
+      "type": "supports",
+      "target": "cap_send_sms"
+    },
+    {
+      "source": "app_email",
+      "type": "supports",
+      "target": "cap_send_sms"
+    },
+    {
+      "source": "app_telegram",
+      "type": "supports",
+      "target": "cap_send_sms"
+    },
+    {
+      "source": "app_iptelephony",
+      "type": "supports",
+      "target": "cap_send_sms"
+    },
+    {
+      "source": "app_smsc",
+      "type": "supports",
+      "target": "cap_send_sms"
+    }
+  ]
+}

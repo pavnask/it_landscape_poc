@@ -1,0 +1,28 @@
+{
+  "systems_in_yaml": 20,
+  "functions_in_yaml": 7,
+  "integrations_in_yaml": 21,
+  "elements_out": 27,
+  "relations_out": 28,
+  "uses_relations": 6,
+  "supports_relations": 22,
+  "unresolved_integrations_count": 15,
+  "unresolved_integrations_examples": [
+    "ecogroup.berezka.integrations.sberid-berezka",
+    "ecogroup.berezka.integrations.sberid-berezka2",
+    "ecogroup.berezka.integrations.sberbusinessid-berezka",
+    "ecogroup.berezka.integrations.payment-berezka",
+    "ecogroup.berezka.integrations.сс_payments_data",
+    "ecogroup.berezka.integrations.berezka-crm",
+    "ecogroup.berezka.integrations.crm-marketing",
+    "ecogroup.berezka.integrations.berezka-smsc",
+    "ecogroup.berezka.integrations.analytics-berezka",
+    "ecogroup.berezka.integrations.crm_telegram",
+    "ecogroup.berezka.integrations.crm_esia",
+    "ecogroup.berezka.integrations.crm_smev",
+    "ecogroup.berezka.integrations.outer_payments",
+    "ecogroup.berezka.integrations.catalog_sberads",
+    "ecogroup.berezka.integrations.osinka_catalog"
+  ],
+  "mapping_assumption": "consumer uses source for integration relations"
+}

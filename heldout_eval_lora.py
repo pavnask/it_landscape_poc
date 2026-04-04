@@ -16,42 +16,48 @@ def extract_first_json_object(text: str) -> str:
         return text.strip()
 
     depth = 0
+    in_string = False
+    escape = False
+
     for i, ch in enumerate(text[start:], start=start):
-        if ch == "{":
+        if in_string:
+            if escape:
+                escape = False
+            elif ch == "\\":
+                escape = True
+            elif ch == '"':
+                in_string = False
+            continue
+
+        if ch == '"':
+            in_string = True
+        elif ch == "{":
             depth += 1
         elif ch == "}":
             depth -= 1
             if depth == 0:
-                return text[start : i + 1]
+                return text[start:i + 1]
 
     return text[start:].strip()
 
 
 def build_prompt(payload: dict) -> str:
-    example_input = {
-        "landscape_context": {
-            "elements": [
-                {
-                    "id": "cap_order_management",
-                    "type": "business_capability",
-                    "name": "Order Management",
-                    "owner": "team_ops",
-                    "environment": "prod",
-                },
-                {
-                    "id": "app_order_service",
-                    "type": "application",
-                    "name": "Order Service",
-                    "domain": "Operations",
-                    "owner": "team_order_platform",
-                    "environment": "prod",
-                    "technology": "Python",
-                },
-            ],
-            "relations": [],
-        },
-        "task": "Add a database for persistent order storage and connect it.",
-    }
+    return (
+        "You are a strict JSON generator.\n"
+        "Return exactly one object with both top-level keys:\n"
+        '{"elements": [...], "relations": [...]}'
+        "\n\nRules:\n"
+        "- Output JSON only\n"
+        "- Always include BOTH keys: elements and relations\n"
+        "- Never return only elements\n"
+        "- Do not output landscape_context\n"
+        "- Do not repeat the input\n"
+        "- Generate only NEW elements and NEW relations\n"
+        "- Allowed element types: application, database, api, team, business_capability\n"
+        "- Allowed relation types: owns, uses, reads_from, writes_to, exposes, supports\n"
+        '- If unsure, return {"elements":[],"relations":[]}\n\n'
+        f"Input:\n{json.dumps(payload, ensure_ascii=False)}\n"
+    )
 
     example_output = {
         "elements": [
@@ -109,7 +115,7 @@ def generate(model, tokenizer, prompt: str) -> str:
     with torch.inference_mode():
         outputs = model.generate(
             **inputs,
-            max_new_tokens=140,
+            max_new_tokens=220,
             do_sample=False,
             num_beams=1,
             use_cache=True,
@@ -119,7 +125,7 @@ def generate(model, tokenizer, prompt: str) -> str:
 
     print(f"Generation finished in {time.time() - t0:.1f}s", flush=True)
 
-    generated_ids = outputs[0][inputs["input_ids"].shape[1] :]
+    generated_ids = outputs[0][inputs["input_ids"].shape[1]:]
     text = tokenizer.decode(generated_ids, skip_special_tokens=True)
     return extract_first_json_object(text)
 
@@ -205,8 +211,10 @@ def main() -> None:
             }
         )
 
-    Path(args.output).write_text(json.dumps(results, indent=2), encoding="utf-8")
-
+    Path(args.output).write_text(
+        json.dumps(results, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+)
     passed = sum(1 for r in results if r["ok"])
     print(f"\nPassed {passed}/{len(results)}. Results written to {args.output}")
 

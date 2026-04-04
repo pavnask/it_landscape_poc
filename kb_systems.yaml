@@ -1,0 +1,29 @@
+kadzo.v2023.kb_systems:
+  ecogroup.berezka.kb.active_directory:
+    title: Active Directory
+    description: Аутентификация внутренних сотрудников
+    class: ИБ-Аутентификация пользователей
+    location: Внутренняя
+    status: Используется
+    softwares:
+      - sber.softwares.ms_ad
+    high_availability:
+      type: Да
+      capacity_management: Полное
+      capacity_reservation_type: Active
+      
+  ecogroup.berezka.kb.ddos:
+    title: Qrator
+    description: Anti-DDoS
+    class: ИБ-Защита от сетевых атак
+    location: Внешняя
+    status: Создается
+    softwares:
+      - sber.softwares.cbsec.bizone_qurator
+
+  ecogroup.berezka.kb.ddos2:
+    title: DDOS security
+    description: Anti-DDoS
+    class: ИБ-Защита от сетевых атак
+    location: Внешняя
+    status: Создается

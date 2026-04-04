@@ -1,0 +1,129 @@
+kadzo.v2023.criticality_passport:
+  ecogroup.berezka.criticality_passport.1c:
+    evaluated_object: ecogroup.berezka.systems.1c
+    description: Паспорт критичности АС 1С
+    object_workload: 15
+    object_consumers_type: Сотрудники компаний Группы (Внутренние клиенты)
+    object_outage_impact: Клиент не смог узнать необходимую информацию (Внутренние и внешние клиенты)
+    object_sla: 1440
+    object_criticality_estimation: Office productivity
+    object_criticality_calculated: Office productivity
+    object_criticality_passport_source: Калькулятор 2.0
+    object_outage_scenarios:
+      - id: scenario1
+        description: опишите сценарий недоступности системы
+        impact: 166
+        clients_impact:
+          - clients_affected: Крупный и средний бизнес (Внешние клиенты)
+            clients_outage_impact: Не получен доступ ко своим счетам, не смог осуществить сделку (Внешние клиенты)
+            clients_num_affected: 10
+            comments: Среднее кол-во пользователей системой за часть
+          - clients_affected: Физические лица (Внешние клиенты)
+            clients_outage_impact: Не оказана услуга в заявленный SLA срок (Внутренние и Внешние клиенты)
+            clients_num_affected: 20
+            comments: Среднее кол-во пользователей системой за часть
+        financial_impact:
+          low: 1
+          medium: 10
+          high: 12
+          critical: 24
+          comments: негативное влияние на фин.рез-т Банка и Группы. Время наступления последсвий в часах
+        reputational_impact:
+          low: 2
+          medium: 11
+          high: 13
+          critical: 25
+          comments: негативное влияние на репутацию Банка и Группы. Время наступления последсвий в часах
+        legal_impact:
+          medium: 10
+          high: 12
+          critical: 24
+          comments: негативные юридические последствия. Время наступления последсвий в часах
+      - id: scenario2
+        description: опишите еще один сценарий недоступности системы
+        impact: 150
+        clients_impact:
+          clients_affected: Физические лица (Внешние клиенты)
+          clients_outage_impact: Клиент понес прямой убыток из-за недоступности сервиса (Внешние клиенты)
+          clients_num_affected: 50
+          comments: Среднее кол-во пользователей системой за час
+        financial_impact:
+          low: 1
+          medium: 10
+          high: 12
+          critical: 24
+          comments: негативное влияние на фин.рез-т Банка и Группы. Время наступления последсвий в часах
+        reputational_impact:
+          low: 1
+          medium: 10
+          high: 12
+          critical: 24
+          comments: негативное влияние на репутацию Банка и Группы. Время наступления последсвий в часах
+        legal_impact:
+          medium: 10
+          high: 12
+          critical: 24
+          comments: негативные юридические последствия. Время наступления последсвий в часах
+  ecogroup.berezka.criticality_passport.berezka:
+    evaluated_object: ecogroup.berezka.systems.berezka
+    object_workload: 7000
+    object_consumers_type: Физические лица (Внешние клиенты)
+    object_outage_impact: Клиент не смог узнать необходимую информацию (Внутренние и внешние клиенты)
+    object_sla: 720
+    object_criticality_estimation: Business operational
+  ecogroup.berezka.criticality_passport.catalog:
+    evaluated_object: ecogroup.berezka.systems.berezka.catalog
+    object_workload: 1400
+    object_consumers_type: Микро/малый бизнес (Внешние клиенты)
+    object_outage_impact: Не оказана услуга в заявленный SLA срок (Внутренние и Внешние клиенты)
+    object_sla: 10
+    object_criticality_estimation: Business critical
+  ecogroup.berezka.criticality_passport.office365:
+    evaluated_object: ecogroup.berezka.external_systems.office365
+    object_workload: 15
+    object_consumers_type: Сотрудники компаний Группы (Внутренние клиенты)
+    object_outage_impact: Клиент не смог узнать необходимую информацию (Внутренние и внешние клиенты)
+    object_sla: 720
+    object_criticality_estimation: Office productivity
+  ecogroup.berezka.criticality_passport.marketing:
+    evaluated_object: ecogroup.berezka.external_systems.marketing
+    object_workload: 100
+    object_consumers_type: Физические лица (Внешние клиенты)
+    object_outage_impact: Не оказана услуга в ожидаемый срок, без нарушения SLA (Внутренние и внешние клиенты)
+    object_sla: 60
+    object_criticality_estimation: Business critical
+  ecogroup.berezka.criticality_passport.smev:
+    evaluated_object: ecogroup.berezka.external_systems.smev
+    object_workload: 40
+    object_consumers_type: Сотрудники компаний Группы (Внутренние клиенты)
+    object_outage_impact: Не оказана услуга в ожидаемый срок, без нарушения SLA (Внутренние и внешние клиенты)
+    object_sla: 1440
+    object_criticality_estimation: Business critical
+  ecogroup.berezka.criticality_passport.analytics:
+    evaluated_object: ecogroup.berezka.systems.analytics
+    object_workload: 40
+    object_consumers_type: Сотрудники компаний Группы (Внутренние клиенты)
+    object_outage_impact: Клиент не смог узнать необходимую информацию (Внутренние и внешние клиенты)
+    object_sla: 720
+    object_criticality_estimation: Office productivity
+  ecogroup.berezka.criticality_passport.iptelephony:
+    evaluated_object: ecogroup.berezka.external_systems.iptelephony
+    object_workload: 40
+    object_consumers_type: Сотрудники компаний Группы (Внутренние клиенты)
+    object_outage_impact: Не оказана услуга в заявленный SLA срок (Внутренние и Внешние клиенты)
+    object_sla: 720
+    object_criticality_estimation: Business operational
+  ecogroup.berezka.criticality_passport.telegram:
+    evaluated_object: ecogroup.berezka.external_systems.telegram
+    object_workload: 30
+    object_consumers_type: Сотрудники компаний Группы (Внутренние клиенты)
+    object_outage_impact: Не оказана услуга в заявленный SLA срок (Внутренние и Внешние клиенты)
+    object_sla: 1440
+    object_criticality_estimation: Office productivity
+  ecogroup.berezka.criticality_passport.2gis:
+    evaluated_object: ecogroup.berezka.ecosystem.partners.2gis
+    object_workload: 15
+    object_consumers_type: Сотрудники компаний Группы (Внутренние клиенты)
+    object_outage_impact: Не оказана услуга в заявленный SLA срок (Внутренние и Внешние клиенты)
+    object_sla: 1440
+    object_criticality_estimation: Office productivity

@@ -1,0 +1,39 @@
+kadzo.v2023.endpoints:
+  ecogroup.berezka.fias_endpoint:
+    title: Получение адресов для формирования регламентной отчетности
+    status: Используется
+    uri: fias.nalog.ru/adresses
+    gates:
+      - ecogroup.berezka.systems.fias_gate
+    owners:
+      - ecogroup.berezka.systems.fias
+    technical-use: Pull
+    technology: API
+    protected:
+      - TLS
+
+  ecogroup.berezka.message_point:
+    title: Получение данных о потребляемых услугах
+    status: Разрабатывается
+    owners:
+      - ecogroup.berezka.systems.berezka
+    gates:
+      - ecogroup.berezka.tech_services.kafka
+    technology: Очереди
+    technical-use: Pull
+    uri: "topic:consumer:orders"
+    protected:
+      - mTLS
+
+  ecogroup.berezka.access_external_data:
+    title: Точка взаимодействия для доступа к внешним информационным ресурсам через ВАРМ
+    status: Используется
+    owners:
+      - ecogroup.berezka.systems.external_data
+    gates:
+      - ecogroup.berezka.tech_services.external_varm
+    technology: Ручное
+    technical-use: Pull
+    uri: "varm.access.ru"
+    protected:
+      - VPN

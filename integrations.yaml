@@ -1,0 +1,321 @@
+kadzo.v2023.integrations:
+  ecogroup.berezka.integrations.sberid-berezka:
+    description: Получение данных по user_info
+    #source: ecosystem.systems.sberid
+    source: sber.ecosystem.enablers.sberid
+    consumer: ecogroup.berezka.systems.berezka
+    data-objects:
+      - ecogroup.berezka.data_objects.user_info
+    technologies:
+      - HTTPS
+      - JSON
+    technical-use: По запросу
+    async: Ложно
+    status: Используется
+    protected:
+      - TLS
+  ecogroup.berezka.integrations.sberid-berezka2:
+    description: Получение id_token и access_token
+    #source: ecosystem.systems.sberid
+    source: sber.ecosystem.enablers.sberid
+    consumer: ecogroup.berezka.systems.berezka
+    data-objects:
+      - ecogroup.berezka.data_objects.token_info
+    technologies:
+      - HTTPS
+      - JSON
+    technical-use: По запросу
+    async: Ложно
+    status: Используется
+    protected:
+      - TLS
+
+  ecogroup.berezka.integrations.sberbusinessid-berezka:
+    description: Интеграция приложения со SberBusinessID
+    source: sber.ecosystem.enablers.sberbusinessid
+    consumer: ecogroup.berezka.systems.berezka
+    data-objects:
+      - ecogroup.berezka.data_objects.executor_name
+    technical-use: По запросу
+    technologies:
+      - HTTPS
+      - JSON
+    async: Ложно
+    status: Используется
+    protected:
+      - TLS
+
+  ecogroup.berezka.integrations.payment-berezka:
+    description: Интеграция платежного шлюза с основным монолитным сервисом
+    source: sber.systems.paymentgate
+    consumer: ecogroup.berezka.systems.berezka
+    data-objects:
+      - ecogroup.berezka.data_objects.service_params
+    technologies:
+      - HTTPS
+      - JSON
+    technical-use: По запросу
+    async: Ложно
+    status: Используется
+    protected:
+      - TLS
+  ecogroup.berezka.integrations.сс_payments_data:
+    description: Данные о платежах по картам
+    source: sber.systems.paymentgate
+    consumer: ecogroup.berezka.systems.berezka
+    data-objects:
+      - ecogroup.berezka.data_objects.cc_pay_data
+    technologies:
+      - HTTPS
+      - JSON
+    technical-use: По запросу
+    async: Ложно
+    status: Используется
+    protected:
+      - TLS
+
+  ecogroup.berezka.integrations.berezka-crm:
+    description: Интеграция маркетплейса с CRM системой
+    source: sber.ecosystem.enablers.sbernba
+    consumer: ecogroup.berezka.systems.crm
+    data-objects:
+      - ecogroup.berezka.data_objects.executor_name
+      - ecogroup.berezka.data_objects.service_deal
+    technologies:
+      - HTTPS
+      - JSON
+    technical-use: По запросу
+    async: Ложно
+    status: Используется
+    protected:
+      - TLS
+
+  ecogroup.berezka.integrations.crm-marketing:
+    description: Интеграция CRM c системой маркетинговых рассылок
+    source: sber.ecosystem.enablers.sberpaywallet
+    consumer: ecogroup.berezka.external_systems.marketing
+    data-objects:
+      - ecogroup.berezka.data_objects.executor_phone
+      - ecogroup.berezka.data_objects.executor_mail
+      - ecogroup.berezka.data_objects.client_phone
+    technologies:
+      - HTTPS
+      - JSON
+    technical-use: По запросу
+    async: Ложно
+    status: Используется
+    protected:
+      - TLS
+
+  ecogroup.berezka.integrations.berezka-smsc:
+    description: Интеграция маркетплейса с системой рассылок СМС
+    source: sber.ecosystem.enablers.sberprofile
+    consumer: ecogroup.berezka.external_systems.smsc
+    data-objects:
+      - ecogroup.berezka.data_objects.client_phone
+    technologies:
+      - HTTPS
+      - JSON
+    technical-use: По запросу
+    async: Ложно
+    status: Используется
+    protected:
+      - TLS
+
+  ecogroup.berezka.integrations.berezka-analitycs:
+    description: Интеграция маркетплейса с аналитической системой
+    source: ecogroup.berezka.systems.berezka
+    consumer: ecogroup.berezka.systems.analytics
+    endpoint: ecogroup.berezka.message_point
+    data-objects:
+      - ecogroup.berezka.data_objects.service_deal
+    technologies:
+      - HTTPS
+      - JSON
+    technical-use: По запросу
+    async: Ложно
+    status: Создается
+    protected:
+      - TLS
+
+  ecogroup.berezka.integrations.analytics-berezka:
+    description: Интеграция аналитической системы с маркеплейсом
+    source: ecogroup.berezka.systems.analytics
+    consumer: sber.ecosystem.enablers.sberbusinessprofile
+    data-objects:
+      - ecogroup.berezka.data_objects.service_stats
+    technologies:
+      - HTTPS
+      - JSON
+    technical-use: По запросу
+    async: Ложно
+    status: Создается
+    protected:
+      - TLS
+
+  ecogroup.berezka.integrations.berezka_1c_payments:
+      description: Интеграция Продуктовой фабрики с Бэк офисом
+      source: ecogroup.berezka.systems.berezka
+      consumer: ecogroup.berezka.systems.1c
+      data-objects:
+        - ecogroup.berezka.data_objects.payment_order
+      technologies:
+        - File
+        - JSON
+      technical-use: По запросу
+      async: Истинно
+      status: Используется
+      protected:
+        - TLS
+
+  ecogroup.berezka.integrations.catalog_berezka_service_info:
+    description: Интеграция Каталога услуг с Продуктовой фабрикой
+    source: ecogroup.berezka.systems.berezka.catalog
+    consumer: ecogroup.berezka.systems.berezka
+    data-objects:
+      - ecogroup.berezka.data_objects.service_details
+    technologies:
+      - HTTPS
+      - JSON
+    technical-use: По запросу
+    async: Истинно
+    status: Используется
+    protected:
+      - TLS
+
+  ecogroup.berezka.integrations.2gis_berezka:
+    description: Интеграция Каталога услуг с Продуктовой фабрикой
+    source: ecogroup.berezka.ecosystem.partners.2gis
+    consumer: ecogroup.berezka.systems.berezka
+    data-objects:
+      - ecogroup.berezka.data_objects.geo_data
+    technologies:
+      - HTTPS
+      - JSON
+    technical-use: По запросу
+    async: Истинно
+    status: Используется
+    protected:
+      - TLS
+
+  ecogroup.berezka.integrations.catalog_crm:
+    description: Передача Каталога услуг в CRM
+    source: ecogroup.berezka.systems.berezka.catalog
+    consumer: ecogroup.berezka.systems.crm
+    data-objects:
+      - ecogroup.berezka.data_objects.service_details
+    technologies:
+      - HTTPS
+      - JSON
+    technical-use: По запросу
+    async: Истинно
+    status: Используется
+    protected:
+      - TLS
+
+  ecogroup.berezka.integrations.crm_telegram:
+    description: Взаимодействие с клиентом через Телеграм
+    source: ecogroup.berezka.systems.crm
+    consumer: sber.ecosystem.enablers.sber247b2c
+    data-objects:
+      - ecogroup.berezka.data_objects.service_details
+    technologies:
+      - HTTPS
+      - JSON
+    technical-use: По запросу
+    async: Истинно
+    status: Используется
+    protected:
+      - TLS
+
+  ecogroup.berezka.integrations.crm_esia:
+    description: Взаимодействие с клиентом через Госуслуги
+    source: ecogroup.berezka.systems.crm
+    consumer: sber.ecosystem.enablers.sber247b2b
+    data-objects:
+      - ecogroup.berezka.data_objects.client_phone
+      - ecogroup.berezka.data_objects.client_name
+      - ecogroup.berezka.data_objects.client_adress
+    technologies:
+      - HTTPS
+      - JSON
+    technical-use: По запросу
+    async: Истинно
+    status: Используется
+    protected:
+      - TLS
+
+  ecogroup.berezka.integrations.crm_smev:
+    description: Взаимодействие с Электронным правительством
+    source: sber.ecosystem.enablers.salut
+    consumer: ecogroup.berezka.external_systems.smev
+    data-objects:
+      - ecogroup.berezka.data_objects.gov_reporting
+    technologies:
+      - HTTPS
+      - JSON
+    technical-use: По запросу
+    async: Истинно
+    status: Используется
+    protected:
+      - TLS
+
+  ecogroup.berezka.integrations.outer_payments:
+    description: Платежи внешним контрагентам
+    source: ecogroup.berezka.systems.1c
+    consumer: sber.systems.paymentgate
+    data-objects:
+      - ecogroup.berezka.data_objects.payment_order
+    technologies:
+      - Шлюз API
+      - УФЕБС
+    technical-use: По запросу
+    async: Истинно
+    status: Используется
+    protected:
+      - ГОСТ
+
+  ecogroup.berezka.integrations.catalog_sberads:
+    description: Передача Каталога услуг в SberAds
+    source: ecogroup.berezka.systems.berezka.catalog
+    consumer: sber.ecosystem.enablers.sberads
+    data-objects:
+      - ecogroup.berezka.data_objects.service_details
+    technologies:
+      - HTTPS
+      - JSON
+    technical-use: По запросу
+    async: Истинно
+    status: Используется
+    protected:
+      - TLS
+
+  ecogroup.berezka.integrations.osinka_catalog:
+    description: Интеграция маркетплейса с аналитической системой
+    source: sber.ecosystem.enablers.jivo
+    consumer: ecogroup.berezka.systems.berezka.catalog
+    data-objects:
+      - ecogroup.berezka.data_objects.service_deal
+    technologies:
+      - HTTPS
+      - JSON
+    technical-use: По запросу
+    protected:
+      - TLS
+    async: Ложно
+    status: Создается
+
+  ecogroup.berezka.integrations.1c_fias:
+    description: Получение списка адресов для формирования регламентной отчетности
+    source: ecogroup.berezka.systems.fias
+    consumer: ecogroup.berezka.systems.1c
+    endpoint: ecogroup.berezka.fias_endpoint
+    data-objects:
+      - ecogroup.berezka.data_objects.user_info
+    technologies:
+      - HTTPS
+    protected:
+      - TLS
+    technical-use: По запросу
+    async: Ложно
+    status: Используется
