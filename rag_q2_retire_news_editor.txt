@@ -1,0 +1,28 @@
+Фрагмент текущего enterprise-ландшафта:
+
+1) Есть система АС Единый Фронт Сотрудника (EFS)
+- jupiter.app_system.efs
+- Внутренняя фронтальная платформа
+
+2) В составе EFS есть подсистема "ФП Редактор новостей"
+- jupiter.app_system.efs_news_editor
+- is_part_of: jupiter.app_system.efs
+- Реализует функцию: jupiter.function.lk_news_editor
+- Сервис: jupiter.srv.lk_news_editor
+- Интеграции:
+  - jupiter.srv.news_publish
+  - jupiter.srv.ai_news_summary
+
+3) Есть базовая система новостей:
+- jupiter.app_system.ecm_news
+- Реализует функции news_publish и news_management
+- Имеет интеграцию с внешним AI news summary сервисом
+
+4) Вывод по паттернам:
+- news editor является частью более крупной фронтальной платформы
+- вывод из эксплуатации надо рассматривать не только как удаление UI, но и как управление зависимостями:
+  - функция
+  - сервис UI
+  - интеграции на публикацию новостей
+  - интеграции на AI summary
+- архитектурно нужен controlled decommission, а не просто выключение компонента

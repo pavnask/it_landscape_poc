@@ -11,4 +11,7 @@ lora_qwen_1_5b_v3/checkpoint-21
 lora_out
 lora_out/checkpoint-20
 lora_out/.DS_Store
+lora_qwen_reasoning_v1
+lora_qwen_reasoning_v2
+lora_qwen_reasoning_v3_pro
 .DS_Store
