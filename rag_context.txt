@@ -1,0 +1,4 @@
+ERP является business critical системой.
+Mobile приложение — клиентский канал.
+В ландшафте уже есть integration layer и API gateway.
+Поддерживается async transport (Kafka).

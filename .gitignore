@@ -14,4 +14,8 @@ lora_out/.DS_Store
 lora_qwen_reasoning_v1
 lora_qwen_reasoning_v2
 lora_qwen_reasoning_v3_pro
+lora_qwen_reasoning_must_win
+adapters_qwen25_7b_reasoning
+adapters_qwen25_7b_reasoning_v2
+adapters_qwen25_7b_reasoning_v3
 .DS_Store

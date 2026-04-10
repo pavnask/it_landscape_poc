@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LoRA vs RAG vs Skills — CTO Deck</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#111834;
+      --panel2:#172145;
+      --text:#eef3ff;
+      --muted:#aeb9d6;
+      --accent:#6ea8fe;
+      --accent2:#63e6be;
+      --danger:#ff8787;
+      --warn:#ffd166;
+      --ok:#8ce99a;
+      --line:rgba(255,255,255,.12);
+      --shadow:0 24px 60px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 5% -10%, rgba(110,168,254,.22), transparent 60%),
+        radial-gradient(900px 500px at 100% 0%, rgba(99,230,190,.12), transparent 52%),
+        linear-gradient(180deg, #0a0f1d 0%, #0c1224 100%);
+      line-height:1.5;
+    }
+    .wrap{
+      max-width:1240px;
+      margin:0 auto;
+      padding:32px 20px 56px;
+    }
+    .hero{
+      background:linear-gradient(135deg, rgba(110,168,254,.14), rgba(99,230,190,.08));
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:34px 36px;
+      box-shadow:var(--shadow);
+      margin-bottom:28px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.04), transparent);
+      transform:translateX(-100%);
+      animation:shine 8s linear infinite;
+    }
+    @keyframes shine{to{transform:translateX(100%)}}
+    h1{
+      margin:0 0 8px;
+      font-size:44px;
+      line-height:1.02;
+      letter-spacing:-.04em;
+    }
+    .subtitle{
+      font-size:18px;
+      color:var(--muted);
+      max-width:860px;
+    }
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:20px;
+    }
+    .chip{
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      font-size:14px;
+      color:#dce7ff;
+    }
+    .slides{
+      display:grid;
+      gap:24px;
+    }
+    .slide{
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      border:1px solid var(--line);
+      border-radius:26px;
+      padding:26px 28px 28px;
+      box-shadow:var(--shadow);
+      break-inside:avoid;
+    }
+    .slide-head{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:16px;
+    }
+    .num{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      background:rgba(110,168,254,.16);
+      border:1px solid rgba(110,168,254,.28);
+      color:#dce7ff;
+      flex:0 0 auto;
+    }
+    h2{
+      margin:0;
+      font-size:28px;
+      letter-spacing:-.03em;
+    }
+    h3{
+      margin:16px 0 10px;
+      font-size:18px;
+      letter-spacing:-.01em;
+    }
+    p{margin:10px 0}
+    .muted{color:var(--muted)}
+    .quote{
+      margin:14px 0 6px;
+      padding:16px 18px;
+      border-left:4px solid var(--accent);
+      border-radius:14px;
+      background:rgba(110,168,254,.08);
+      font-size:18px;
+    }
+    .strong-quote{
+      margin:18px 0 6px;
+      padding:18px 20px;
+      border-left:4px solid var(--accent2);
+      border-radius:14px;
+      background:rgba(99,230,190,.08);
+      font-size:20px;
+      font-weight:700;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      border:1px solid var(--line);
+      border-radius:18px;
+      overflow:hidden;
+      background:rgba(255,255,255,.02);
+      margin-top:10px;
+    }
+    th,td{
+      padding:13px 14px;
+      border-bottom:1px solid var(--line);
+      text-align:left;
+      vertical-align:top;
+    }
+    th{
+      background:rgba(255,255,255,.04);
+      color:#d7e4ff;
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+    tr:last-child td{border-bottom:none}
+    .grid2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:18px;
+      background:var(--panel2);
+    }
+    .badge{
+      display:inline-block;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.04em;
+      margin-bottom:8px;
+    }
+    .bad{background:rgba(255,135,135,.12); color:#ffd0d0; border:1px solid rgba(255,135,135,.28)}
+    .warn{background:rgba(255,209,102,.12); color:#ffe8a1; border:1px solid rgba(255,209,102,.28)}
+    .good{background:rgba(140,233,154,.12); color:#d4f8da; border:1px solid rgba(140,233,154,.28)}
+    .info{background:rgba(110,168,254,.12); color:#dce7ff; border:1px solid rgba(110,168,254,.28)}
+    ul{
+      margin:8px 0 0 18px;
+      padding:0;
+    }
+    li{margin:8px 0}
+    .divider{
+      height:1px;
+      background:linear-gradient(90deg, transparent, var(--line), transparent);
+      margin:18px 0;
+    }
+    .footer{
+      margin-top:18px;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+    }
+    @media (max-width: 900px){
+      .grid2{grid-template-columns:1fr}
+      h1{font-size:36px}
+      h2{font-size:24px}
+    }
+    @media print{
+      body{background:#fff;color:#111}
+      .hero,.slide,.card,table{box-shadow:none}
+      .hero,.slide,.card,table,th,td{border-color:#ddd}
+      .subtitle,.muted,.footer{color:#444}
+      .quote,.strong-quote{background:#f7f9fc;color:#111}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>LoRA vs RAG vs Skills</h1>
+      <div class="subtitle">Ответ скептикам на языке экспериментов: что реально делает архитектурные решения, а что только создаёт иллюзию управления качеством.</div>
+      <div class="chips">
+        <span class="chip">1.5B → 7B</span>
+        <span class="chip">RAG</span>
+        <span class="chip">Skills.md</span>
+        <span class="chip">LoRA</span>
+        <span class="chip">MLX на Mac</span>
+        <span class="chip">Commodity hardware</span>
+      </div>
+    </section>
+
+    <div class="slides">
+
+      <section class="slide">
+        <div class="slide-head">
+          <div class="num">1</div>
+          <h2>Что говорили скептики</h2>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Скептический тезис</th>
+              <th>Что имеется в виду</th>
+              <th>Наш честный ответ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>“Достаточно взять большую модель”</td>
+              <td>Интеллект модели сам решит проблему архитектора</td>
+              <td>Нет. Большая модель знает больше, но не принимает архитектурные решения</td>
+            </tr>
+            <tr>
+              <td>“RAG достаточно”</td>
+              <td>Контекст автоматически превращается в reasoning</td>
+              <td>Нет. RAG даёт факты, но не заставляет модель выбирать правильный паттерн</td>
+            </tr>
+            <tr>
+              <td>“Запишем всё в skills.md”</td>
+              <td>Правила смогут заменить архитектора</td>
+              <td>Нет. Skills масштабируют инструкции, но не создают архитектурное мышление</td>
+            </tr>
+            <tr>
+              <td>“LoRA не учится”</td>
+              <td>Она просто использует знания базовой модели</td>
+              <td>Частично верно про знания, но неверно про поведение: LoRA меняет decision bias</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="strong-quote">
+          Разумные гипотезы — но каждая из них сломалась на практике.
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="slide-head">
+          <div class="num">2</div>
+          <h2>Что мы реально протестировали</h2>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>Описание</th>
+              <th>Результат</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>A</td><td>Base 1.5B</td><td>❌ не принимает решения</td></tr>
+            <tr><td>B</td><td>1.5B + RAG</td><td>⚠️ лучше, но плавает</td></tr>
+            <tr><td>C</td><td>1.5B + RAG + skills</td><td>❌ жёсткий, но поверхностный</td></tr>
+            <tr><td>D</td><td>1.5B + LoRA + RAG</td><td>✅ лучше по решениям</td></tr>
+            <tr><td>E</td><td>Base 7B + RAG</td><td>❌ умнее, но колеблется</td></tr>
+            <tr><td>F</td><td>Base 7B + RAG + skills</td><td>❌ послушный, но неточный</td></tr>
+            <tr><td>G</td><td>7B + LoRA + RAG</td><td>✅ правильное архитектурное решение</td></tr>
+          </tbody>
+        </table>
+
+        <div class="quote">
+          Целью было не “получить красивый ответ”, а добиться <b>надёжного архитектурного решения</b>.
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="slide-head">
+          <div class="num">3</div>
+          <h2>Почему RAG и Skills не решили задачу</h2>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <span class="badge warn">RAG</span>
+            <h3>Что делает хорошо</h3>
+            <ul>
+              <li>Даёт факты о ландшафте</li>
+              <li>Повышает релевантность ответа</li>
+              <li>Уменьшает галлюцинации</li>
+            </ul>
+            <div class="divider"></div>
+            <h3>Что не делает</h3>
+            <ul>
+              <li>Не навязывает правильный паттерн</li>
+              <li>Не создаёт enterprise bias</li>
+              <li>Не заставляет модель выбрать решение</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <span class="badge bad">Skills.md</span>
+            <h3>Что ожидали</h3>
+            <ul>
+              <li>“Запишем всё в skills”</li>
+              <li>“Модель будет отвечать как архитектор”</li>
+              <li>“Rules заменят обучение”</li>
+            </ul>
+            <div class="divider"></div>
+            <h3>Что получилось</h3>
+            <ul>
+              <li>Модель буквально следует правилам</li>
+              <li>Теряет нюансы контекста</li>
+              <li>Выбирает самое простое совпавшее правило</li>
+              <li>Даёт shallow или смещённые рекомендации</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="strong-quote">
+          Skills — это инструкция, а не мышление.  
+          Нельзя превратить модель в архитектора, просто записав правила.
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="slide-head">
+          <div class="num">4</div>
+          <h2>Что реально делает LoRA</h2>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Поведение</th>
+              <th>Base 7B</th>
+              <th>7B + LoRA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Детектит anti-pattern</td>
+              <td>❌ непоследовательно</td>
+              <td>✅ последовательно</td>
+            </tr>
+            <tr>
+              <td>Выбирает integration pattern</td>
+              <td>❌ расплывчато</td>
+              <td>✅ точно</td>
+            </tr>
+            <tr>
+              <td>Уровень уверенности</td>
+              <td>❌ низкий</td>
+              <td>✅ высокий</td>
+            </tr>
+            <tr>
+              <td>Enterprise bias</td>
+              <td>❌ слабый</td>
+              <td>✅ сильный</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="quote">
+          Пример победившего ответа LoRA:  
+          <b>“File exchange как основной online-механизм — anti-pattern; нужен API через gateway и integration layer, при необходимости с async transport.”</b>
+        </div>
+
+        <div class="strong-quote">
+          LoRA не добавляет новые знания.  
+          LoRA меняет то, <b>как модель принимает решение</b> внутри уже имеющихся знаний.
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="slide-head">
+          <div class="num">5</div>
+          <h2>Технический прорыв: 7B LoRA на commodity hardware</h2>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <span class="badge info">Что мы доказали</span>
+            <ul>
+              <li>7B модель реально работает на Mac через MLX</li>
+              <li>LoRA training реально запускается локально</li>
+              <li>Inference с адаптером быстрый и воспроизводимый</li>
+              <li>Нужен не GPU-кластер, а грамотный стек</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="badge good">Почему это важно</span>
+            <ul>
+              <li>Быстрые итерации без дорогой инфраструктуры</li>
+              <li>Низкий порог входа для команды</li>
+              <li>Enterprise reasoning можно дообучать локально</li>
+              <li>Это уже не лабораторная игрушка, а практический путь</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="strong-quote">
+          Мы научились делать LoRA на большой модели на обычном Mac.  
+          Это переводит fine-tuning из “дорогой R&D” в “рабочий инженерный инструмент”.
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="slide-head">
+          <div class="num">6</div>
+          <h2>Главные выводы и ответы скептикам</h2>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Вопрос / тезис</th>
+              <th>Ответ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>“Может, хватит только RAG?”</td>
+              <td>Нет. RAG даёт факты, но не делает архитектурный выбор</td>
+            </tr>
+            <tr>
+              <td>“Может, достаточно skills.md?”</td>
+              <td>Нет. Skills делают модель послушной, но не создают reasoning</td>
+            </tr>
+            <tr>
+              <td>“Может, просто взять 7B?”</td>
+              <td>Нет. Большая модель умнее, но без LoRA остаётся нерешительной</td>
+            </tr>
+            <tr>
+              <td>“LoRA просто пользуется знаниями базы?”</td>
+              <td>База даёт capacity. LoRA меняет decision bias и default architectural choices</td>
+            </tr>
+            <tr>
+              <td>“Можно ли всё записать в skills и закрыть проблему архитектора?”</td>
+              <td>Нет. Skills — это operational playbook, а не источник архитектурного мышления</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="strong-quote">
+          Base model — знает.  
+          RAG — информирует.  
+          Skills — направляют.  
+          <b>LoRA — решает.</b>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="footer">
+      CTO Deck — LoRA vs RAG vs Skills / Russian HTML Version
+    </div>
+  </div>
+</body>
+</html>
