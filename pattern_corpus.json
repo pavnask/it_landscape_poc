@@ -1,0 +1,153 @@
+[
+  {
+    "id": "pat_ai_reuse_hub",
+    "title": "AI Hub reuse",
+    "tags": [
+      "ai",
+      "assistant",
+      "hub",
+      "reuse",
+      "mobile"
+    ],
+    "pattern": "Если в компании уже есть AI Hub, новый AI use case лучше строить как отдельный сервис поверх существующего AI-контура, а не как новую независимую платформу.",
+    "example_answer": "Для AI-assistant правильнее опереться на существующий AI Hub и выделить отдельный assistant service с API-слоем для фронтальных каналов."
+  },
+  {
+    "id": "pat_front_no_direct_internal",
+    "title": "No direct front-to-core coupling",
+    "tags": [
+      "mobile",
+      "front",
+      "gateway",
+      "api",
+      "integration"
+    ],
+    "pattern": "Фронтальные каналы не должны ходить напрямую во внутренние системы; нужен API Gateway или integration layer.",
+    "example_answer": "Mobile app следует подключать к ERP через integration layer, а не напрямую."
+  },
+  {
+    "id": "pat_file_exchange_not_online",
+    "title": "File exchange is not online target pattern",
+    "tags": [
+      "file",
+      "exchange",
+      "erp",
+      "mobile",
+      "batch"
+    ],
+    "pattern": "File exchange допустим как batch или временный паттерн, но не как основная online-интеграция.",
+    "example_answer": "Для ERP и mobile основной целевой паттерн — API/integration layer; file exchange допустим только как переходный вариант."
+  },
+  {
+    "id": "pat_event_driven_multi_consumer",
+    "title": "Event-driven for multi-consumer scenarios",
+    "tags": [
+      "kafka",
+      "event",
+      "async",
+      "consumers",
+      "integration"
+    ],
+    "pattern": "Если один producer публикует данные, а несколько систем должны реагировать, нужен event-driven транспорт (Kafka/queue), а не point-to-point связи.",
+    "example_answer": "Producer публикует события в транспорт, потребители подписываются на топики."
+  },
+  {
+    "id": "pat_kafka_vs_api_tradeoff",
+    "title": "Kafka vs API trade-off",
+    "tags": [
+      "kafka",
+      "api",
+      "tradeoff",
+      "sync",
+      "async"
+    ],
+    "pattern": "API подходит для простых синхронных сценариев с одним потребителем; Kafka — для слабой связанности, масштабирования и нескольких потребителей.",
+    "example_answer": "Нельзя считать Kafka универсально лучшей; выбор зависит от сценария."
+  },
+  {
+    "id": "pat_decommission_dependencies_first",
+    "title": "Decommission starts from dependencies",
+    "tags": [
+      "decommission",
+      "dependencies",
+      "lifecycle",
+      "shutdown"
+    ],
+    "pattern": "Вывод из эксплуатации начинается не с удаления UI, а с анализа зависимостей, миграции потребителей и отключения интеграций.",
+    "example_answer": "Сначала карта зависимостей и миграция вызовов, затем отключение сервиса и только потом удаление компонента."
+  },
+  {
+    "id": "pat_parallel_migration",
+    "title": "Parallel migration then shutdown",
+    "tags": [
+      "migration",
+      "compatibility",
+      "parallel",
+      "fallback"
+    ],
+    "pattern": "При замене сервиса или интеграции нужно сначала ввести новый контур параллельно старому, перевести потребителей и только потом отключать старый.",
+    "example_answer": "Сначала parallel run, затем migration и validation, потом final shutdown."
+  },
+  {
+    "id": "pat_component_in_platform",
+    "title": "Component inside platform",
+    "tags": [
+      "platform",
+      "component",
+      "subsystem",
+      "dependency"
+    ],
+    "pattern": "Если компонент входит в более крупную платформу, decommission должен учитывать связи: платформа → подсистема → функция → сервис → интеграции.",
+    "example_answer": "Нельзя выключать подсистему внутри платформы без проверки всей цепочки зависимостей."
+  },
+  {
+    "id": "pat_notification_shared_service",
+    "title": "Shared notification service",
+    "tags": [
+      "notification",
+      "crm",
+      "marketplace",
+      "shared"
+    ],
+    "pattern": "Для нескольких систем правильнее выделить единый notification service, а не строить прямые интеграции в каналы доставки.",
+    "example_answer": "CRM и marketplace отправляют события в единый notification service."
+  },
+  {
+    "id": "pat_integration_layer_default",
+    "title": "Use existing enterprise integration pattern",
+    "tags": [
+      "integration",
+      "gateway",
+      "transport",
+      "enterprise",
+      "standard"
+    ],
+    "pattern": "Если в ландшафте уже есть сервисные интеграции, шлюзы и транспорт, новая интеграция должна по умолчанию использовать этот же enterprise-паттерн.",
+    "example_answer": "Новая интеграция должна входить в существующий управляемый слой, а не создавать нестандартный путь."
+  },
+  {
+    "id": "pat_ai_not_in_front",
+    "title": "Do not embed AI logic in frontend",
+    "tags": [
+      "ai",
+      "mobile",
+      "frontend",
+      "api"
+    ],
+    "pattern": "AI-логику не стоит встраивать напрямую во фронт; её нужно выносить в отдельный сервисный/API-слой.",
+    "example_answer": "Mobile app подключается к AI service через API, а не содержит модельную логику у себя."
+  },
+  {
+    "id": "pat_replace_intermediate_node",
+    "title": "Replacing intermediate integration node",
+    "tags": [
+      "integration",
+      "crm",
+      "erp",
+      "remove",
+      "impact"
+    ],
+    "pattern": "Удаление промежуточного integration component без замещения ломает связи и повышает связанность; нужен replacement path.",
+    "example_answer": "Integration Layer можно убирать только после ввода альтернативного контура."
+  }
+]

@@ -31,7 +31,7 @@
 
 ## A. Base model only
 
-Runtime: **11.0s**
+Runtime: **11.2s**
 
 Heuristic score: **0/4**
 
@@ -59,7 +59,7 @@ Answer:
 
 ## B. Base model + RAG
 
-Runtime: **12.8s**
+Runtime: **13.0s**
 
 Heuristic score: **1/4**
 
@@ -88,7 +88,7 @@ Answer:
 
 ## D. Reasoning LoRA only
 
-Runtime: **11.1s**
+Runtime: **11.3s**
 
 Heuristic score: **3/4**
 
@@ -116,7 +116,7 @@ AI-assistant - это новый сервис, который будет вза�
 
 ## C. Reasoning LoRA + RAG
 
-Runtime: **12.4s**
+Runtime: **12.5s**
 
 Heuristic score: **2/4**
 
